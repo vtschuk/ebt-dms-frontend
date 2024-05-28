@@ -28,6 +28,7 @@ import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/conf
 import {UserEditDialogContentComponent} from "../intern/user-edit-dialog-content/user-edit-dialog-content.component";
 import {UserEditDialogComponent} from "../intern/user-edit-dialog/user-edit-dialog.component";
 import {ToastrService} from "ngx-toastr";
+import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
 @Component({
   selector: 'app-admin-view',
@@ -80,6 +81,7 @@ export class AdminViewComponent implements OnInit {
 
   // Language
   currentLanguage: Language = {id: 0, name: '', aktiv: false}
+  selectedLang = ''
   languages: Observable<Language[]> = of()
   languageFormControl = new FormControl('');
 
@@ -248,9 +250,7 @@ export class AdminViewComponent implements OnInit {
   }
 
   about() {
-    this.dialog.open(AboutDialogComponent, {
-      data: null,
-    });
+    this.dialog.open(InfoDialogComponent);
   }
 
 

@@ -54,7 +54,7 @@
 <div class="system-container">
   <mat-form-field>
     <mat-label> Sprachen </mat-label>
-    <mat-select [formControl]="languageFormControl" required>
+    <mat-select [formControl]="languageFormControl" [(value)]="selectedLang" required>
       <mat-option *ngFor="let  lang of languages | async" [value]="lang"> {{lang.name}}</mat-option>
     </mat-select>
   </mat-form-field>

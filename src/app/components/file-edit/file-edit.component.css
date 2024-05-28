@@ -1,0 +1,56 @@
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+label {
+  color: #435960;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #d7f5dc;
+}
+
+button:disabled {
+  background-color: rgb(233, 176, 176);
+  color: rgb(0, 0, 0);
+  cursor: auto;
+}
+
+input[type="text"] {
+  box-sizing: border-box;
+  width: 50%;
+  padding: .5rem;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+input[type="email"] {
+  box-sizing: border-box;
+  width: 50%;
+  padding: .5rem;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+input[type="date"], input[type="tel"] {
+  box-sizing: border-box;
+  width: 50%;
+  padding: .5rem;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+input[type="number"] {
+  box-sizing: border-box;
+  width: 2.5%;
+  padding: .5rem;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.alert {
+  width: 50%;
+}

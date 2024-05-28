@@ -1,0 +1,15 @@
+.login-view {
+  display: grid;
+}
+.login-window {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.login-window-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: auto;
+}

@@ -1,0 +1,42 @@
+Anforderungen:
+
+Allgemeines
+Das Frontend wird in Angular und Typescript entwickelt.
+
+1 Akten werden als eine Liste dargestellt.
+2. Liste enthält folgende Einträge:
+2.1 Akten Nummer
+2.2 Akten Name
+2.3 Button für die Ansicht
+2.4 Button für die Bearbeitung
+    Für die Bearbeitung der Akte ist das Modul "file-edit" zuständig.
+
+Administration:
+Bedienung der Administration kann nur mit der Benutzer mit Rolle "admin" durchführen
+
+1. Aktenbearbeiter einfügen:
+  - Name
+  - Vorname
+  - E-Mail
+  - Rolle
+
+2. Bearbeiter editieren:
+3. Bearbeiter loschen
+Ein Benutzer darf sich selber nicht aus dem System löschen.
+
+Spracheinstellungen
+ Es gibt 5 Sprachen die eingestellt werden können.
+
+
+
+Es wird eine JWT Anmeldung  in Frontend mit einem Login Fenster implementiert
+
+Folgende Rollen sollen in Frontend realisiert werden
+
+Admin Rolle: kann Akten sichten, editieren, und Administrationsaufgaben machen.
+edit Rolle: kann Akten sichten und editieren
+read Rolle: kann Akten sichten
+
+Rollen, Login-Name und Password werden im Administation/Benutzer Management angelegt
+Zum allerersten Anmelden im System wird ein Default Login/Password  admin/admin angelegt
+

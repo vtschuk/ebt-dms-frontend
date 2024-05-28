@@ -1,0 +1,78 @@
+<div>
+  <button mat-stroked-button color="primary" (click)="getPreviousEntry()"
+          matTooltip="vorherige Akte aus der Liste aufrufen"> Vorherige Akte
+  </button>
+  <button mat-stroked-button color="primary" (click)="listEntries()" matTooltip="Aktenliste aufrufen"> Aktenliste
+  </button>
+  <button mat-stroked-button color="warn" (click)="editFile()" matTooltip="Akte bearbeiten (Richtige Rolle notwendig)">
+    Bearbeiten
+  </button>
+  <button mat-stroked-button color="primary" (click)="createPdf()" matTooltip="Akte ins PDF konvertieren"> PDF</button>
+  <button mat-stroked-button color="primary" (click)="downloadPersonFile()" matTooltip="Akte als ZIP komplett aufrufen">
+    Download
+  </button>
+  <button mat-stroked-button color="primary" (click)="sendFile()" matTooltip="Akte als E-Mail anhang versenden">
+    Senden
+  </button>
+  <button mat-stroked-button color="primary" (click)="linkFile()" matTooltip="Akte über Link abrufen">
+    Webzugriff
+  </button>
+
+  <button mat-stroked-button color="primary" (click)="getNextEntry()" matTooltip="nächste Akte aus der Liste aufrufen">
+    Nächste Akte
+  </button>
+  <button mat-button color="primary" (click)="about()" matTooltip="Info über das Programm aufrufen">Info</button>
+  <button mat-stroked-button color="warn" (click)="administrate()"
+          matTooltip="Administration aufrufen (Richtige Rolle notwendig)"> Administration
+  </button>
+  <button mat-stroked-button color="primary" (click)="getSupport()" matTooltip="Support für das Programm aufrufen">Support
+  </button>
+</div>
+
+
+<div class="container" id="htmlData">
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Personalakte</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <div> Personalnummer: {{currentPerson.id}} </div>
+      <div> Name:  {{currentPerson.name}} {{currentPerson.vorname}} </div>
+      <div> Geburtstag: {{currentPerson.birthsday | date: 'yyyy.MM.dd'}}</div>
+    </mat-card-content>
+  </mat-card>
+
+
+  <mat-card>
+    <mat-card-content>
+      <div> E-Mail: <a href="mailto:{{currentPerson.email}}"> {{currentPerson.email}} </a></div>
+      <div> Mobil: {{currentPerson.cellphone}}</div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header> Adresse</mat-card-header>
+    <mat-card-content>
+      <div> {{currentPerson.address.country}}  </div>
+      <div> {{currentPerson.address.region}}</div>
+      <div> {{currentPerson.address.plz}} {{currentPerson.address.ort}} </div>
+      <div> {{currentPerson.address.strasse}} {{currentPerson.address.hausnummer}}</div>
+    </mat-card-content>
+  </mat-card>
+  <div>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+        <mat-card class="mat-elevation-z4">
+          <mat-card-actions>
+
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+</div>

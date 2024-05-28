@@ -1,0 +1,13 @@
+<!-- nav class="navbar navbar-expand navbar-dark bg-dark px-3" *ngIf="token" -->
+<!-- div class="navbar-nav" -->
+<!-- a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a -->
+<!-- a class="nav-item nav-link" routerLink="/view" routerLinkActive="active">View</a -->
+<!--button class="btn btn-link nav-item nav-link" (click)="logout()">Logout</--button -->
+<!-- /div-->
+
+<!-- /nav -->
+<div class="app-container" [ngClass]="{ 'bg-light': token }">
+  <alert></alert>
+  <router-outlet></router-outlet>
+</div>
+

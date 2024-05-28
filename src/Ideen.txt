@@ -1,0 +1,11 @@
+Info zum Programm
+Gehalt
+Steuerklasse
+Navigation zu der Adresse (Google)
+Bankverbindung
+Beziehung zu anderen:
+    Vorgesetzter von
+    Berichete an:
+Werdegang:
+Geburtsort
+

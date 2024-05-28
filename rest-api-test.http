@@ -1,0 +1,33 @@
+POST http://localhost:9090/api/user
+Content-Type: application/json
+
+{"username": "admin2",  "role": "admin","password": "admin2", "deposit":  10}
+
+###
+
+POST http://localhost:9090/api/login/create
+Content-Type: application/json
+
+{"username": "admin",  "role": "admin","password": "admin"}
+
+###
+
+POST http://localhost:9090/api/login/create
+Content-Type: application/json
+
+{"username": "edit",  "role": "edit","password": "edit"}
+
+###
+
+POST http://localhost:9090/api/login/create
+Content-Type: application/json
+
+{"username": "read",  "role": "read","password": "read"}
+
+<> 2023-10-10T131748.500.txt
+<> 2023-10-10T131416.500.txt
+<> 2023-10-10T131230.500.txt
+
+###
+
+

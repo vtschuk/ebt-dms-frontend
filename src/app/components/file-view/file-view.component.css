@@ -1,0 +1,30 @@
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 30px;
+}
+
+.version-info {
+  font-size: 10pt;
+  float: right;
+  margin: 8px;
+}
+
+mat-card-header {
+  background: rgb(210, 237, 238);
+}
+
+mat-card-title {
+  color: rgb(7, 15, 29);
+  font-size: 40px;
+}
+
+mat-card-content {
+  background: rgb(245, 255, 247);
+  padding: 20px;
+}
+
+mat-card-actions {
+  padding: 10px;
+}

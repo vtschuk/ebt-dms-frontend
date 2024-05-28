@@ -1,0 +1,17 @@
+
+.user-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.system-container {
+
+}
+

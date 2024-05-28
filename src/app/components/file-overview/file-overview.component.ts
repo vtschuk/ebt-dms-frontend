@@ -106,6 +106,6 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   }
 
   getSupport() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 }

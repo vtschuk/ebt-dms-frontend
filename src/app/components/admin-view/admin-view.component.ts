@@ -27,6 +27,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/confirm-dialog.component";
 import {UserEditDialogContentComponent} from "../intern/user-edit-dialog-content/user-edit-dialog-content.component";
 import {UserEditDialogComponent} from "../intern/user-edit-dialog/user-edit-dialog.component";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-admin-view',
@@ -95,7 +96,7 @@ export class AdminViewComponent implements OnInit {
 
   passwd = ''
 
-  constructor(private adminService: AdminService, private router: Router, public dialog: MatDialog, private loginService: LoginService) {
+  constructor(private adminService: AdminService, private router: Router, public dialog: MatDialog, private loginService: LoginService, private toastr: ToastrService) {
   }
 
   getText(option: any) {
@@ -267,10 +268,10 @@ export class AdminViewComponent implements OnInit {
   }
 
   gotoArchivList() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 
   getSupport() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 }

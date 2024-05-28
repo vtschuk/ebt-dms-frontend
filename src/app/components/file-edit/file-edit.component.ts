@@ -189,12 +189,8 @@ export class FileEditComponent implements OnInit {
     })
   }
 
-  private reloadImage() {
-
-  }
-
   archivEntry() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 
   reload() {
@@ -240,10 +236,10 @@ export class FileEditComponent implements OnInit {
   }
 
   getSupport() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 
   encryptFile() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 }

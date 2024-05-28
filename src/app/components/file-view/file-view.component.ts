@@ -122,14 +122,14 @@ export class FileViewComponent implements OnInit {
   }
 
   linkFile() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 
   sendFile() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 
   getSupport() {
-
+    this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 }

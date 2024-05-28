@@ -6,12 +6,12 @@ import {Person} from '../../model/person';
 import {PersonService} from '../../services/person.service';
 import * as moment from "moment";
 import {MatDialog} from "@angular/material/dialog";
-import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 import {FilepickerDirective} from "../../directives/filepicker.directive";
 import {UploadPhotoImageService} from "../../services/upload.photo.image.service";
 import {UploadDocFilesService} from "../../services/upload.doc.files.service";
 import {UploadDocFilesInfo} from "../../model/upload.doc.files.info";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/confirm-dialog.component";
+import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
 @Component({
   selector: 'app-file-edit',
@@ -198,9 +198,7 @@ export class FileEditComponent implements OnInit {
   }
 
   about() {
-    this.dialog.open(AboutDialogComponent, {
-      data: null,
-    });
+    this.dialog.open(InfoDialogComponent)
 
   }
 

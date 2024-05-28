@@ -5,7 +5,6 @@ import {Router, RouterModule} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Address} from '../../model/address';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
-import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LoginService} from "../../services";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
@@ -14,6 +13,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/confirm-dialog.component";
+import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
 @Component({
   selector: 'app-file-overview',
@@ -79,9 +79,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   }
 
   about() {
-    this.dialog.open(AboutDialogComponent, {
-      data: null,
-    });
+    this.dialog.open(InfoDialogComponent)
   }
 
   applyFilter(filterValue: string) {

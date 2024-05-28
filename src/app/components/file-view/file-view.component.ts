@@ -6,8 +6,8 @@ import {ToastrService} from 'ngx-toastr';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {Address} from '../../model/address';
-import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
 @Component({
   selector: 'app-file-view',
@@ -112,9 +112,7 @@ export class FileViewComponent implements OnInit {
   }
 
   about() {
-    this.dialog.open(AboutDialogComponent, {
-      data: null,
-    });
+    this.dialog.open(InfoDialogComponent);
   }
 
   administrate() {

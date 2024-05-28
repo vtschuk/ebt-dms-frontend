@@ -7,7 +7,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {AsyncPipe, NgFor} from "@angular/common";
 import {Observable, of} from "rxjs";
-import {AboutDialogComponent} from "../about-dialog/about-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";

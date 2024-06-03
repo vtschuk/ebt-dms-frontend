@@ -24,14 +24,14 @@ import {FileAddDialogComponent} from "../intern/file-add-dialog/file-add-dialog.
 })
 export class FileOverviewComponent implements OnInit, AfterViewInit {
 
-  personen: IFile[] = [];
+  files: IFile[] = [];
   displayedColumns: string[] = ['id', 'name', 'editor', 'thema', 'ansicht', "edit", "delete"];
-  dataSource: MatTableDataSource<IFile> = new MatTableDataSource<IFile>(this.personen);
+  dataSource: MatTableDataSource<IFile> = new MatTableDataSource<IFile>(this.files);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{}
 
   constructor(
-    private personService: FileService,
+    private fileService: FileService,
     private route: Router,
     private toastr: ToastrService,
     private router: Router,
@@ -51,8 +51,8 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
 
   refreshView() {
     console.log("Aktenliste neu einlesen")
-    this.personen = []
-    this.personService.getAllFiles().subscribe(personen => {
+    this.files = []
+    this.fileService.getAllFiles().subscribe(personen => {
       this.dataSource.data = personen
     }, () => {
       this.toastr.error("kann keine Aktenliste abrufen")
@@ -84,7 +84,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         console.log('delete file')
-        this.personService.deleteFile(id).subscribe(() => {
+        this.fileService.deleteFile(id).subscribe(() => {
           this.toastr.warning("Akte gelöscht: " + id)
         }, () => {
           this.toastr.error("kann keine Akte löschen: " + id)

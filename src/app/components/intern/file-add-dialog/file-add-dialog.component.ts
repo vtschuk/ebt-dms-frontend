@@ -21,21 +21,29 @@ export class FileAddDialogComponent {
     ) {
   }
   createFile() {
-    var file = new File(0,
+    const file = new File(0,
+      this.filenumber,
       this.filename,
+      new Date().toISOString(),
       this.fileissue,
       '',
-      new Date().toISOString(), false, false);
+      false,
+      false);
 
-    this.fileService.createNewFile(file).subscribe(person => {
+    const fileModel: File = {
+      id: 0,
+      filenumber: this.filenumber,
+      name: this.filename,
+      date: new Date().toISOString(),
+      issue: this.fileissue,
+      description: '',
+      archive: false,
+      encrypted: false
+    }
+    this.fileService.createNewFile(fileModel).subscribe(person => {
       this.toastr.success("Neue Akte wird angelegt")
-      console.log(person)
+      console.log(fileModel)
       this.dialogRef.close()
-      this.fileService.getAllFiles().subscribe(personen => {
-        //this.dataSource.data = personen
-      }, () => {
-        this.toastr.error("kann keine Aktenliste abrufen")
-      });
     }, () => {
       this.toastr.error("kann keine Akte angelegen")
     })

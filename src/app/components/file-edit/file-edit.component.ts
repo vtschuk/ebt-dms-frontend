@@ -22,8 +22,9 @@ export class FileEditComponent implements OnInit {
     0,
     '',
     '',
-    '',
     new Date().toISOString(),
+    '',
+    '',
     false,
     false
   );

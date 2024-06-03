@@ -5,7 +5,9 @@
         <mat-label>Aktennummer</mat-label>
         <input type="text"
                matInput
-               [value]="filenumber">
+               required
+               pattern="[0-9]+"
+               [(ngModel)]="filenumber" name="filenumber">
       </mat-form-field>
     </form>
 
@@ -14,7 +16,8 @@
         <mat-label>Name</mat-label>
         <input type="text"
                matInput
-               [value]="filename"
+               required
+               [(ngModel)]="filename" name="filename"
         >
       </mat-form-field>
     </form>
@@ -22,9 +25,12 @@
     <form class="form-group">
       <mat-form-field>
         <mat-label>Thema</mat-label>
-        <input type="text"
+        <input id="fileissue"
+               type="text"
                matInput
-               [value]="fileissue">
+               required
+               [(ngModel)]="fileissue" name="fileissue">
+
       </mat-form-field>
     </form>
 

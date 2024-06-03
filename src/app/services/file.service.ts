@@ -22,13 +22,13 @@ export class FileService {
     return this.httpClient.get<File>(this.HOST + this.uri + '/get/' + id, {'headers': this.HEADERS}).pipe();
   }
 
-  createNewFile(person: File): Observable<File> {
-    const body = JSON.stringify(person)
+  createNewFile(file: File): Observable<File> {
+    const body = JSON.stringify(file)
     return this.httpClient.post<File>(this.HOST + this.uri + '/create', body, {'headers': this.HEADERS}).pipe();
   }
 
-  saveFile(id: number, person: File): Observable<File> {
-    const body = JSON.stringify(person)
+  saveFile(id: number, file: File): Observable<File> {
+    const body = JSON.stringify(file)
     return this.httpClient.put<File>(this.HOST + this.uri + '/save/' + id, body, {'headers': this.HEADERS}).pipe();
   }
 

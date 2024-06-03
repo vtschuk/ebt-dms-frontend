@@ -6,7 +6,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
+export class FileService {
   HOST = 'http://localhost:9090'
   uri = '/file'
   HEADERS = {'content-type': 'application/json'}

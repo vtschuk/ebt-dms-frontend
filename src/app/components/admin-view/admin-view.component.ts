@@ -23,11 +23,11 @@ import {MatListModule} from "@angular/material/list";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
-import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/confirm-dialog.component";
-import {UserEditDialogContentComponent} from "../intern/user-edit-dialog-content/user-edit-dialog-content.component";
+import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {UserEditDialogComponent} from "../intern/user-edit-dialog/user-edit-dialog.component";
 import {ToastrService} from "ngx-toastr";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
+import {UserAddDialogComponent} from "../intern/user-add-dialog/user-add-dialog.component";
 
 @Component({
   selector: 'app-admin-view',
@@ -262,7 +262,7 @@ export class AdminViewComponent implements OnInit {
   }
 
   addUserDialog() {
-    const userDialog = new UserEditDialogComponent(this.dialog)
+    const userDialog = new UserAddDialogComponent(this.dialog)
     userDialog.openDialog(this.currentUser)
   }
 

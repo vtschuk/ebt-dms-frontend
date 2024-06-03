@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Person} from '../../model/person';
-import {PersonService} from '../../services/person.service';
+import {FileService} from '../../services/file.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import jsPDF from 'jspdf';
@@ -21,7 +21,7 @@ export class FileViewComponent implements OnInit {
 
   currentPerson: Person = new Person(0, '', '', '', new Address(1234, '', '', '', '', 1), new Date().toISOString(), "");
 
-  constructor(private personService: PersonService,
+  constructor(private personService: FileService,
               private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrService,

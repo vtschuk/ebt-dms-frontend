@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {IPerson, Person} from '../../model/person';
-import {PersonService} from '../../services/person.service';
+import {FileService} from '../../services/file.service';
 import {Router, RouterModule} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Address} from '../../model/address';
@@ -12,7 +12,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
-import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/confirm-dialog.component";
+import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
 @Component({
@@ -31,7 +31,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{}
 
   constructor(
-    private personService: PersonService,
+    private personService: FileService,
     private route: Router,
     private toastr: ToastrService,
     private router: Router,
@@ -58,6 +58,8 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     });
   }
   addNewEntry() {
+
+
     var person = new Person(0, 'Vorname', 'Nachname', 'person@mail.org', new Address(1234, '', '', '', '', 1), new Date().toISOString(), "");
     console.log('Add a new Entry');
     this.personService.createNewPerson(person).subscribe(person => {
@@ -83,12 +85,6 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
 
   about() {
     this.dialog.open(InfoDialogComponent)
-  }
-
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
   }
 
   deleteFile(id: number) {

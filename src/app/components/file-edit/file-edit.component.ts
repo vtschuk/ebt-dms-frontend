@@ -3,14 +3,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Address} from '../../model/address';
 import {Person} from '../../model/person';
-import {PersonService} from '../../services/person.service';
+import {FileService} from '../../services/file.service';
 import * as moment from "moment";
 import {MatDialog} from "@angular/material/dialog";
 import {FilepickerDirective} from "../../directives/filepicker.directive";
 import {UploadPhotoImageService} from "../../services/upload.photo.image.service";
 import {UploadDocFilesService} from "../../services/upload.doc.files.service";
 import {UploadDocFilesInfo} from "../../model/upload.doc.files.info";
-import {ConfirmDialogComponent, ConfirmDialogModel} from "../confirm-dialog/confirm-dialog.component";
+import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
 @Component({
@@ -51,7 +51,7 @@ export class FileEditComponent implements OnInit {
   _buttonPicker: FilepickerDirective;
 
 
-  constructor(private personService: PersonService,
+  constructor(private personService: FileService,
               private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrService,

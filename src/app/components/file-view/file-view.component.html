@@ -40,27 +40,9 @@
 
   <mat-card>
     <mat-card-content>
-      <div> Personalnummer: {{currentPerson.id}} </div>
-      <div> Name:  {{currentPerson.name}} {{currentPerson.vorname}} </div>
-      <div> Geburtstag: {{currentPerson.birthsday | date: 'yyyy.MM.dd'}}</div>
-    </mat-card-content>
-  </mat-card>
-
-
-  <mat-card>
-    <mat-card-content>
-      <div> E-Mail: <a href="mailto:{{currentPerson.email}}"> {{currentPerson.email}} </a></div>
-      <div> Mobil: {{currentPerson.cellphone}}</div>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-header> Adresse</mat-card-header>
-    <mat-card-content>
-      <div> {{currentPerson.address.country}}  </div>
-      <div> {{currentPerson.address.region}}</div>
-      <div> {{currentPerson.address.plz}} {{currentPerson.address.ort}} </div>
-      <div> {{currentPerson.address.strasse}} {{currentPerson.address.hausnummer}}</div>
+      <div> Aktennummer: {{currentFile.id}} </div>
+      <div> Name:  {{currentFile.name}}  </div>
+      <div> Angelegt am: {{currentFile.date | date: 'yyyy.MM.dd'}}</div>
     </mat-card-content>
   </mat-card>
   <div>

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Person} from '../model/person'
+import {File} from '../model/file'
 import {Observable} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 
@@ -14,25 +14,25 @@ export class FileService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAllPersons(): Observable<Person[]> {
-    return this.httpClient.get<Person[]>(this.HOST + this.uri + '/all', {'headers': this.HEADERS}).pipe();
+  getAllFiles(): Observable<File[]> {
+    return this.httpClient.get<File[]>(this.HOST + this.uri + '/all', {'headers': this.HEADERS}).pipe();
   }
 
-  getPersonById(id: number): Observable<Person> {
-    return this.httpClient.get<Person>(this.HOST + this.uri + '/get/' + id, {'headers': this.HEADERS}).pipe();
+  getFileById(id: number): Observable<File> {
+    return this.httpClient.get<File>(this.HOST + this.uri + '/get/' + id, {'headers': this.HEADERS}).pipe();
   }
 
-  createNewPerson(person: Person): Observable<Person> {
+  createNewFile(person: File): Observable<File> {
     const body = JSON.stringify(person)
-    return this.httpClient.post<Person>(this.HOST + this.uri + '/create', body, {'headers': this.HEADERS}).pipe();
+    return this.httpClient.post<File>(this.HOST + this.uri + '/create', body, {'headers': this.HEADERS}).pipe();
   }
 
-  savePerson(id: number, person: Person): Observable<Person> {
+  saveFile(id: number, person: File): Observable<File> {
     const body = JSON.stringify(person)
-    return this.httpClient.put<Person>(this.HOST + this.uri + '/save/' + id, body, {'headers': this.HEADERS}).pipe();
+    return this.httpClient.put<File>(this.HOST + this.uri + '/save/' + id, body, {'headers': this.HEADERS}).pipe();
   }
 
-  deletePerson(id: number): Observable<Person> {
-    return this.httpClient.delete<Person>(this.HOST + this.uri + '/delete/' + id).pipe();
+  deleteFile(id: number): Observable<File> {
+    return this.httpClient.delete<File>(this.HOST + this.uri + '/delete/' + id).pipe();
   }
 }

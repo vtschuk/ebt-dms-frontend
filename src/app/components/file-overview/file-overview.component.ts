@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {IPerson, Person} from '../../model/person';
+import {IFile, File} from '../../model/file';
 import {FileService} from '../../services/file.service';
 import {Router, RouterModule} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Address} from '../../model/address';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatDialog} from "@angular/material/dialog";
 import {LoginService} from "../../services";
@@ -14,6 +13,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatDividerModule} from "@angular/material/divider";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
+import {FileAddDialogComponent} from "../intern/file-add-dialog/file-add-dialog.component";
 
 @Component({
   selector: 'app-file-overview',
@@ -24,9 +24,9 @@ import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 })
 export class FileOverviewComponent implements OnInit, AfterViewInit {
 
-  personen: IPerson[] = [];
+  personen: IFile[] = [];
   displayedColumns: string[] = ['id', 'name', 'editor', 'thema', 'ansicht', "edit", "delete"];
-  dataSource: MatTableDataSource<IPerson> = new MatTableDataSource<IPerson>(this.personen);
+  dataSource: MatTableDataSource<IFile> = new MatTableDataSource<IFile>(this.personen);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{}
 
@@ -50,29 +50,16 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   }
 
   refreshView() {
+    console.log("Aktenliste neu einlesen")
     this.personen = []
-    this.personService.getAllPersons().subscribe(personen => {
+    this.personService.getAllFiles().subscribe(personen => {
       this.dataSource.data = personen
     }, () => {
       this.toastr.error("kann keine Aktenliste abrufen")
     });
   }
   addNewEntry() {
-
-
-    var person = new Person(0, 'Vorname', 'Nachname', 'person@mail.org', new Address(1234, '', '', '', '', 1), new Date().toISOString(), "");
-    console.log('Add a new Entry');
-    this.personService.createNewPerson(person).subscribe(person => {
-      this.toastr.success("Neue Akte wird angelegt")
-      console.log(person)
-      this.personService.getAllPersons().subscribe(personen => {
-        this.dataSource.data = personen
-      }, () => {
-        this.toastr.error("kann keine Aktenliste abrufen")
-      });
-    }, () => {
-      this.toastr.error("kann keine Akte angelegen")
-    })
+      this.dialog.open(FileAddDialogComponent).afterClosed().subscribe(() => this.refreshView())
   }
 
   administrate() {
@@ -97,7 +84,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         console.log('delete file')
-        this.personService.deletePerson(id).subscribe(() => {
+        this.personService.deleteFile(id).subscribe(() => {
           this.toastr.warning("Akte gelöscht: " + id)
         }, () => {
           this.toastr.error("kann keine Akte löschen: " + id)

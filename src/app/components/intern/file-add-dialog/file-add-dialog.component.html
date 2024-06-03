@@ -1,1 +1,36 @@
-<p>file-add-dialog works!</p>
+<div class="container">
+  <form class="form-control" style="background-color: azure;">
+    <form class="form-group">
+      <mat-form-field>
+        <mat-label>Aktennummer</mat-label>
+        <input type="text"
+               matInput
+               [value]="filenumber">
+      </mat-form-field>
+    </form>
+
+    <form class="form-group">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input type="text"
+               matInput
+               [value]="filename"
+        >
+      </mat-form-field>
+    </form>
+
+    <form class="form-group">
+      <mat-form-field>
+        <mat-label>Thema</mat-label>
+        <input type="text"
+               matInput
+               [value]="fileissue">
+      </mat-form-field>
+    </form>
+
+  </form>
+  <form>
+    <button mat-stroked-button (click)="createFile()" style="align-self: center"> Anlegen</button>
+    <button mat-stroked-button (click)="abort()" style="align-self: center"> Abbrechen</button>
+  </form>
+</div>

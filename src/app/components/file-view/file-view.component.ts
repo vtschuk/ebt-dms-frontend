@@ -1,11 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Person} from '../../model/person';
+import {File} from '../../model/file';
 import {FileService} from '../../services/file.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import {Address} from '../../model/address';
 import {MatDialog} from "@angular/material/dialog";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 
@@ -19,20 +18,17 @@ export class FileViewComponent implements OnInit {
   @ViewChild('htmlData')
   htmlData!: ElementRef;
 
-  currentPerson: Person = new Person(0, '', '', '', new Address(1234, '', '', '', '', 1), new Date().toISOString(), "");
+  currentFile: File = new File(0, '', '', '', new Date().toISOString(), false, false);
 
-  constructor(private personService: FileService,
+  constructor(private fileService: FileService,
               private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrService,
               public dialog: MatDialog
   ) {
     const id = Number(this.route.snapshot.paramMap.get('id'))
-    this.personService.getPersonById(id).subscribe(person => {
-      this.currentPerson = person
-      if (person.address === null) {
-        this.currentPerson.address = new Address(1234, '', '', '', '', 1)
-      }
+    this.fileService.getFileById(id).subscribe(file => {
+      this.currentFile = file
     }, error => {
       this.toastr.error("kann die Akte nicht abrufen");
     });
@@ -46,7 +42,7 @@ export class FileViewComponent implements OnInit {
   }
 
   editFile() {
-    this.router.navigate(['/akte/' + this.currentPerson.id])
+    this.router.navigate(['/akte/' + this.currentFile.id])
   }
 
   createPdf(): void {
@@ -71,15 +67,13 @@ export class FileViewComponent implements OnInit {
 
   getNextEntry() {
     console.log('Get Next Entry')
-    this.personService.getAllPersons().subscribe(personen => {
+    this.fileService.getAllFiles().subscribe(personen => {
       console.log(personen)
-      const filtered = personen.filter(person => person.id > this.currentPerson.id)
+      const filtered = personen.filter(person => person.id > this.currentFile.id)
       if (filtered) {
         if (filtered.length >= 1) {
-          this.currentPerson = filtered[0];
-          if (!this.currentPerson.address) {
-            this.currentPerson.address = new Address(1234, '', '', '', '', 1)
-          }
+          this.currentFile = filtered[0];
+
         } else {
           this.toastr.info('Keine weitere Akten vorhanden')
         }
@@ -89,17 +83,15 @@ export class FileViewComponent implements OnInit {
 
   getPreviousEntry() {
     console.log('Get Previous Entry')
-    const id = this.currentPerson.id;
-    this.personService.getAllPersons().subscribe(personen => {
+    const id = this.currentFile.id;
+    this.fileService.getAllFiles().subscribe(personen => {
       console.log(personen)
-      const filtered = personen.filter(person => person.id < this.currentPerson.id)
+      const filtered = personen.filter(person => person.id < this.currentFile.id)
 
       if (filtered && filtered.length >= 1) {
         console.log('filtered persons: ' + filtered)
-        this.currentPerson = filtered[filtered.length - 1]
-        if (filtered[filtered.length - 1].address === null) {
-          this.currentPerson.address = new Address(1234, '', '', '', '', 1)
-        }
+        this.currentFile = filtered[filtered.length - 1]
+
       } else {
         this.toastr.info('Keine weitere Akten vorhanden')
       }

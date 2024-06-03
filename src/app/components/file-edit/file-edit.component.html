@@ -3,7 +3,7 @@
           matTooltip="vorherige Akte aus der Liste aufrufen"> Vorherige Akte
   </button>
   <button mat-stroked-button color="primary" type="submit"
-          [disabled]="email.invalid || name.invalid || vorname.invalid || false" (click)="saveEntry()"
+            (click)="saveEntry()"
           matTooltip="Info about the action"> Speichern
   </button>
   <button mat-stroked-button color="primary" (click)="reload()" matTooltip="Aktenänderungen verwerfen (Akte neu laden)">
@@ -42,130 +42,5 @@
 
 <div class="container">
   <h1> Personalakte Nr. {{currentPerson.id}} </h1>
-  <form (ngSubmit)="onSubmit()" #personalForm="ngForm">
-    <h4>{{currentPerson.vorname}} {{currentPerson.name}}</h4>
 
-    <form class="form-control" style="background-color: azure;">
-      <form class="form-group">
-        <label for="vorname"> Vorname: </label>
-        <input type="text" class="form-control" id="vorname"
-               required [(ngModel)]="currentPerson.vorname" name="vorname"
-               pattern="[A-Za-zäöüÄÖÜß'\ ']+"
-               #vorname="ngModel">
-        <div *ngIf="vorname.touched">
-          <div *ngIf='vorname.errors?.pattern' class='alert alert-danger'> Geben Sie gültigen Name an (Nur Buchstaben)
-          </div>
-        </div>
-      </form>
-
-      <form class="form-group">
-        <label for="name"> Nachname: </label>
-        <input type="text" class="form-control" id="name"
-               required [(ngModel)]="currentPerson.name" name="name"
-               pattern="[A-Za-zäöüÄÖÜß'\ ']+"
-               #name="ngModel">
-        <div *ngIf="name.touched">
-          <div *ngIf="name.errors?.pattern" class="alert alert-danger"> Geben Sie gültigen Name an (Nur Buchstaben)
-          </div>
-        </div>
-      </form>
-      <form class="form-group">
-        <label for="email">E-Mail: </label>
-        <input type="email" class="form-control" id="email"
-               required [(ngModel)]="currentPerson.email" name="email"
-               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-               #email="ngModel">
-        <div *ngIf="email.touched">
-          <p *ngIf="email.errors?.pattern" class="form-control alert alert-danger"> Geben gültige Sie E-Mail an</p>
-        </div>
-      </form>
-      <form class="form-group">
-        <label for="birthsday"> Geburtstag </label>
-        <input type="date" class="form-control" id="birthsday"
-               [ngModel]="birthsday" (ngModelChange)="setDate($event)" name="birthsday">
-      </form>
-      <form>
-        <label for="cellphone"> Mobil </label>
-        <input type="tel" class="form-control" id="cellphone"
-               [(ngModel)]="currentPerson.cellphone" name="cellphone"
-               #cellphone="ngModel">
-      </form>
-
-      <div class="form-group">
-        <form>
-          <label for="file">Foto </label>
-          <input
-            id="file"
-            type="file"
-            (change)="selectFile($event)"
-            class="form-control"
-            accept="image/*"
-          >
-        </form>
-      </div>
-    </form>
-
-    <div>
-      Foto:
-      <img [src]='photo' width="200" height="300"/>
-    </div>
-
-
-    <form class="form-group">
-      <h4> Adresse </h4>
-      <form class="form-control" style="background-color: cornsilk;">
-
-        <label for="country"> Land </label>
-        <input type="text" class="form-control" id='country'
-               [(ngModel)]="currentPerson.address.country" name="country"
-               #country="ngModel">
-      </form>
-      <form>
-        <label for="region"> Region/Bundesland </label>
-        <input type="text" class="form-control" id='region'
-               [(ngModel)]="currentPerson.address.region" name="region"
-               #region="ngModel">
-      </form>
-      <form>
-        <label for="plz"> Postleitzahl/Ort </label>
-        <div class="input-group">
-          <input type="number" style="background-color: mintcream;" class="form-control" id='plz'
-                 [(ngModel)]="currentPerson.address.plz" name="plz"
-                 #plz="ngModel">
-
-          <input type="text" class="form-control" id='ort'
-                 [(ngModel)]="currentPerson.address.ort" name="ort"
-                 #ort="ngModel">
-        </div>
-
-        <label for="street"> Strasse/Hausnummer </label>
-        <div class="input-group">
-          <input type="text" class="form-control" id='street'
-                 [(ngModel)]="currentPerson.address.strasse" name="strasse"
-                 #strasse="ngModel">
-          <input type="number" style="background-color: mintcream;" class="form-control" id='hausnummer'
-                 [(ngModel)]="currentPerson.address.hausnummer" name="hausnummer"
-                 #hausnummer="ngModel">
-        </div>
-        <div>
-          Charakteristika
-          <textarea>
-
-          </textarea>
-        </div>
-      </form>
-
-      <form>
-        <div>
-          Hochgeladene Dateien:
-          <app-selected-files-table [files]="_selectedFiles"></app-selected-files-table>
-        </div>
-      </form>
-
-    </form>
-    <form class="form-group" style="background-color: rgb(245, 248, 245);">
-      <div class="container">
-      </div>
-    </form>
-  </form>
 </div>

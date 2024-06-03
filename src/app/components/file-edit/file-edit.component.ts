@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Address} from '../../model/address';
-import {Person} from '../../model/person';
+import {File} from '../../model/file';
 import {FileService} from '../../services/file.service';
 import * as moment from "moment";
 import {MatDialog} from "@angular/material/dialog";
 import {FilepickerDirective} from "../../directives/filepicker.directive";
-import {UploadPhotoImageService} from "../../services/upload.photo.image.service";
 import {UploadDocFilesService} from "../../services/upload.doc.files.service";
 import {UploadDocFilesInfo} from "../../model/upload.doc.files.info";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
@@ -20,24 +18,18 @@ import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 })
 export class FileEditComponent implements OnInit {
 
-  currentPerson: Person = new Person(
+  currentPerson: File = new File(
     0,
     '',
     '',
     '',
-    new Address(
-      1234,
-      '',
-      '',
-      '',
-      '',
-      1),
     new Date().toISOString(),
-    ""
+    false,
+    false
   );
 
   submitted = false;
-  birthsday: string = ''
+  date: string = ''
   files: string[] = []
 
   _selectedFiles: UploadDocFilesInfo[] = [];
@@ -55,7 +47,6 @@ export class FileEditComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private toastr: ToastrService,
-              private uploadPhotoService: UploadPhotoImageService,
               private uploadDocFilesService: UploadDocFilesService,
               public dialog: MatDialog
   ) {
@@ -82,21 +73,13 @@ export class FileEditComponent implements OnInit {
 
   private loadFile(id: number) {
     if (id != 0) {
-      this.personService.getPersonById(id).subscribe(data => {
+      this.personService.getFileById(id).subscribe(data => {
         console.log(data)
-        this.currentPerson = data;
-        if (data.address === null) {
-          this.currentPerson.address = new Address(12345, '', '', '', '', 0);
+        this.currentPerson = data
+        if (this.currentPerson.date) {
+          const date = new Date(this.currentPerson.date);
+          this.date = moment(date).format('YYYY-MM-DD')
         }
-        if (this.currentPerson.birthsday) {
-          const date = new Date(this.currentPerson.birthsday);
-          this.birthsday = moment(date).format('YYYY-MM-DD')
-        }
-        this.photo = undefined;
-        this.uploadPhotoService.download(this.currentPerson.id).subscribe(data => {
-          console.log(data)
-          this.photo = URL.createObjectURL(data)
-        })
 
         this.uploadDocFilesService.getFileListByPersonId(this.currentPerson.id).subscribe(filelist => {
           this._selectedFiles = filelist;
@@ -124,7 +107,7 @@ export class FileEditComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         console.log('Delete Entry:' + this.currentPerson.id);
-        this.personService.deletePerson(this.currentPerson.id).subscribe(() => {
+        this.personService.deleteFile(this.currentPerson.id).subscribe(() => {
           this.toastr.warning("Akte gelöscht: " + this.currentPerson.id)
         }, () => {
           this.toastr.error("kann keine Akte löschen: " + this.currentPerson.id)
@@ -139,7 +122,7 @@ export class FileEditComponent implements OnInit {
 
   saveEntry() {
     console.log('Save Entry:' + JSON.stringify(this.currentPerson));
-    this.personService.savePerson(this.currentPerson.id, this.currentPerson).subscribe(() => {
+    this.personService.saveFile(this.currentPerson.id, this.currentPerson).subscribe(() => {
       this.toastr.success("Akte aktualisiert")
     }, () => {
       this.toastr.error("Speichern der Akte fehlgeschlagen");
@@ -163,7 +146,7 @@ export class FileEditComponent implements OnInit {
 
   getNextEntry() {
     console.log('Get Next Entry')
-    this.personService.getAllPersons().subscribe(personen => {
+    this.personService.getAllFiles().subscribe(personen => {
       console.log(personen)
       const filtered = personen.filter(person => person.id > this.currentPerson.id)
 
@@ -177,7 +160,7 @@ export class FileEditComponent implements OnInit {
   }
 
   getPreviousEntry() {
-    this.personService.getAllPersons().subscribe(personen => {
+    this.personService.getAllFiles().subscribe(personen => {
       const filtered = personen.filter(person => person.id < this.currentPerson.id)
 
       if (filtered && filtered.length > 0) {
@@ -207,11 +190,11 @@ export class FileEditComponent implements OnInit {
   }
 
   setDate($event: any) {
-    this.birthsday = $event
-    console.log(this.birthsday)
-    const isoDateTimeString = new Date(this.birthsday).toISOString()
+    this.date = $event
+    console.log(this.date)
+    const isoDateTimeString = new Date(this.date).toISOString()
     console.log(isoDateTimeString)
-    this.currentPerson.birthsday = new Date(this.birthsday).getTime().toString()
+    this.currentPerson.date = new Date(this.date).getTime().toString()
   }
 
   selectFile($event: any) {
@@ -219,17 +202,7 @@ export class FileEditComponent implements OnInit {
     if (elem.files.length > 0) {
       const formData = new FormData();
       formData.append('file', elem.files[0], elem.files[0].name)
-      this.uploadPhotoService.upload(this.currentPerson.id, formData)
-        .subscribe((data) => {
-            console.log(data)
-            this.uploadPhotoService.download(this.currentPerson.id).subscribe(data => {
-              console.log(data)
-              this.photo = URL.createObjectURL(data)
-            })
-          },
-          (error) => {
-            this.toastr.error("Error uploading file...")
-          })
+
     }
   }
 

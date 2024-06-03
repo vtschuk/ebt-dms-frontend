@@ -46,6 +46,10 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     console.log("ngOnInit");
+    this.refreshView()
+  }
+
+  refreshView() {
     this.personen = []
     this.personService.getAllPersons().subscribe(personen => {
       this.dataSource.data = personen
@@ -53,7 +57,6 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
       this.toastr.error("kann keine Aktenliste abrufen")
     });
   }
-
   addNewEntry() {
     var person = new Person(0, 'Vorname', 'Nachname', 'person@mail.org', new Address(1234, '', '', '', '', 1), new Date().toISOString(), "");
     console.log('Add a new Entry');
@@ -88,7 +91,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
-  deleteFile() {
+  deleteFile(id: number) {
     const dialogData = new ConfirmDialogModel('Akte löschen ?', 'Sind Sie sicher, dass Sie diese Akte löschen wollen?');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '400px',
@@ -98,6 +101,13 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         console.log('delete file')
+        this.personService.deletePerson(id).subscribe(() => {
+          this.toastr.warning("Akte gelöscht: " + id)
+        }, () => {
+          this.toastr.error("kann keine Akte löschen: " + id)
+        }, () => {
+          this.refreshView()
+        })
       }
     });
 

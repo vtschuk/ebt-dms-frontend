@@ -18,6 +18,7 @@ export class UserEditDialogComponent {
 
   openDialog(user: User) {
     this.dialog.open(UserEditDialogContentComponent, {
+      disableClose: true,
       data: user
     });
   }

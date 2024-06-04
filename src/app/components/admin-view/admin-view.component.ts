@@ -99,6 +99,7 @@ export class AdminViewComponent implements OnInit {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: '400px',
       closeOnNavigation: true,
+      disableClose: true,
       data: dialogData
     })
     dialogRef.afterClosed().subscribe(dialogResult => {

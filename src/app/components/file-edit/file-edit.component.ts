@@ -18,7 +18,7 @@ import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 })
 export class FileEditComponent implements OnInit {
 
-  currentPerson: File = new File(
+  currentFile: File = new File(
     0,
     '',
     '',
@@ -60,7 +60,7 @@ export class FileEditComponent implements OnInit {
     for (let i = 0; i < files.length; i++) {
       this._selectedFiles = this._selectedFiles.concat({
         id: 0,
-        personId: this.currentPerson.id,
+        personId: this.currentFile.id,
         name: files[i].name,
         type: files[i].type,
         file: files[i]
@@ -76,13 +76,13 @@ export class FileEditComponent implements OnInit {
     if (id != 0) {
       this.personService.getFileById(id).subscribe(data => {
         console.log(data)
-        this.currentPerson = data
-        if (this.currentPerson.date) {
-          const date = new Date(this.currentPerson.date);
+        this.currentFile = data
+        if (this.currentFile.date) {
+          const date = new Date(this.currentFile.date);
           this.date = moment(date).format('YYYY-MM-DD')
         }
 
-        this.uploadDocFilesService.getFileListByPersonId(this.currentPerson.id).subscribe(filelist => {
+        this.uploadDocFilesService.getFileListByPersonId(this.currentFile.id).subscribe(filelist => {
           this._selectedFiles = filelist;
         })
       }, () => {
@@ -105,13 +105,14 @@ export class FileEditComponent implements OnInit {
       closeOnNavigation: true,
       data: dialogData
     })
+
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
-        console.log('Delete Entry:' + this.currentPerson.id);
-        this.personService.deleteFile(this.currentPerson.id).subscribe(() => {
-          this.toastr.warning("Akte gelöscht: " + this.currentPerson.id)
+        console.log('Delete Entry:' + this.currentFile.id);
+        this.personService.deleteFile(this.currentFile.id).subscribe(() => {
+          this.toastr.warning("Akte gelöscht: " + this.currentFile.id)
         }, () => {
-          this.toastr.error("kann keine Akte löschen: " + this.currentPerson.id)
+          this.toastr.error("kann keine Akte löschen: " + this.currentFile.id)
         }, () => {
           this.router.navigate(['/view'])
         })
@@ -122,8 +123,8 @@ export class FileEditComponent implements OnInit {
   }
 
   saveEntry() {
-    console.log('Save Entry:' + JSON.stringify(this.currentPerson));
-    this.personService.saveFile(this.currentPerson.id, this.currentPerson).subscribe(() => {
+    console.log('Save Entry:' + JSON.stringify(this.currentFile));
+    this.personService.saveFile(this.currentFile.id, this.currentFile).subscribe(() => {
       this.toastr.success("Akte aktualisiert")
     }, () => {
       this.toastr.error("Speichern der Akte fehlgeschlagen");
@@ -131,7 +132,7 @@ export class FileEditComponent implements OnInit {
 
     if (this._selectedFiles && this._selectedFiles.length > 0) {
       this._selectedFiles.filter(file => file.file != undefined).forEach(file => {
-        this.uploadDocFilesService.uploadFile(this.currentPerson.id, file.file as Blob).subscribe()
+        this.uploadDocFilesService.uploadFile(this.currentFile.id, file.file as Blob).subscribe()
       })
     }
   }
@@ -141,18 +142,18 @@ export class FileEditComponent implements OnInit {
   }
 
   viewEntry() {
-    console.log('view Entry' + this.currentPerson.id)
-    this.router.navigate(['/overview/' + this.currentPerson.id])
+    console.log('view Entry' + this.currentFile.id)
+    this.router.navigate(['/overview/' + this.currentFile.id])
   }
 
   getNextEntry() {
     console.log('Get Next Entry')
     this.personService.getAllFiles().subscribe(personen => {
       console.log(personen)
-      const filtered = personen.filter(person => person.id > this.currentPerson.id)
+      const filtered = personen.filter(person => person.id > this.currentFile.id)
 
       if (filtered && filtered.length > 0) {
-        this.currentPerson = filtered[0]
+        this.currentFile = filtered[0]
         this.reload()
       } else {
         this.toastr.info('Keine weitere Akten vorhanden')
@@ -162,10 +163,10 @@ export class FileEditComponent implements OnInit {
 
   getPreviousEntry() {
     this.personService.getAllFiles().subscribe(personen => {
-      const filtered = personen.filter(person => person.id < this.currentPerson.id)
+      const filtered = personen.filter(person => person.id < this.currentFile.id)
 
       if (filtered && filtered.length > 0) {
-        this.currentPerson = filtered[filtered.length - 1]
+        this.currentFile = filtered[filtered.length - 1]
         this.reload()
       } else {
         this.toastr.info("keine weitere Akten vorhanden")
@@ -178,7 +179,7 @@ export class FileEditComponent implements OnInit {
   }
 
   reload() {
-    this.loadFile(this.currentPerson.id)
+    this.loadFile(this.currentFile.id)
   }
 
   about() {
@@ -195,7 +196,7 @@ export class FileEditComponent implements OnInit {
     console.log(this.date)
     const isoDateTimeString = new Date(this.date).toISOString()
     console.log(isoDateTimeString)
-    this.currentPerson.date = new Date(this.date).getTime().toString()
+    this.currentFile.date = new Date(this.date).getTime().toString()
   }
 
   selectFile($event: any) {

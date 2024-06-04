@@ -15,7 +15,7 @@
 
 export interface IFile {
   id: number,
-  filenumber: string
+  filenumber: string,
   name: string,
   date: string,
   issue: string,

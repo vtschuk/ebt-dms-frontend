@@ -14,18 +14,19 @@ import {MatDividerModule} from "@angular/material/divider";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 import {FileAddDialogComponent} from "../intern/file-add-dialog/file-add-dialog.component";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-file-overview',
   templateUrl: './file-overview.component.html',
   styleUrls: ['./file-overview.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe],
 })
 export class FileOverviewComponent implements OnInit, AfterViewInit {
 
   files: IFile[] = [];
-  displayedColumns: string[] = ['id', 'name', 'editor', 'thema', 'ansicht', "edit", "delete"];
+  displayedColumns: string[] = ['filenumber', 'name', 'editor', 'thema', 'date', 'ansicht', "edit", "delete"];
   dataSource: MatTableDataSource<IFile> = new MatTableDataSource<IFile>(this.files);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{}
@@ -52,14 +53,20 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   refreshView() {
     console.log("Aktenliste neu einlesen")
     this.files = []
-    this.fileService.getAllFiles().subscribe(personen => {
-      this.dataSource.data = personen
+    this.fileService.getAllFiles().subscribe(files => {
+      this.dataSource.data = files
     }, () => {
       this.toastr.error("kann keine Aktenliste abrufen")
     });
   }
   addNewEntry() {
-      this.dialog.open(FileAddDialogComponent).afterClosed().subscribe(() => this.refreshView())
+      this.dialog.open(FileAddDialogComponent, {
+        maxWidth: '450px',
+        minHeight: '350px',
+        closeOnNavigation: true,
+        disableClose: true,
+        data: null
+    }).afterClosed().subscribe(() => this.refreshView())
   }
 
   administrate() {

@@ -24,6 +24,7 @@ import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 import {UserEditDialogContentComponent} from "../intern/user-edit-dialog-content/user-edit-dialog-content.component";
 import {UserService} from "../../services/user.service";
 import {UserAddDialogContentComponent} from "../intern/user-add-dialog-content/user-add-dialog-content.component";
+import {ResetPasswordDialogComponent} from "../intern/reset-password-dialog/reset-password-dialog.component";
 
 @Component({
   selector: 'app-admin-view',
@@ -98,10 +99,6 @@ export class AdminViewComponent implements OnInit {
     })
   }
 
-  // Language
-  saveLogin() {
-    console.log('create Login')
-  }
 
   deleteLogin(user: User) {
 
@@ -163,7 +160,9 @@ export class AdminViewComponent implements OnInit {
   }
 
   changePassword() {
-
+    this.dialog.open(ResetPasswordDialogComponent, {
+      disableClose: true
+    })
   }
 
   getDocu() {

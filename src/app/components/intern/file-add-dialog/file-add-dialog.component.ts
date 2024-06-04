@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {File} from "../../../model/file";
 import {FileService} from "../../../services/file.service";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatDialogRef} from "@angular/material/dialog";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
@@ -15,7 +15,7 @@ export class FileAddDialogComponent {
   fileissue: string = ''
 
   constructor(private fileService: FileService,
-              public dialog: MatDialog,
+              //public dialog: MatDialog,
               private toastr: ToastrService,
               public dialogRef: MatDialogRef<FileAddDialogComponent>
   ) {

@@ -5,6 +5,7 @@ import {ResponseToken} from "../model/responsetoken";
 import {Router} from "@angular/router";
 import {User} from "../model/user";
 import {RegisterLoginRequest} from "../model/register.login.request";
+import {ChangePasswordRequest} from "../model/change.password.request";
 
 
 @Injectable({
@@ -47,5 +48,13 @@ export class LoginService {
 
   create(login: RegisterLoginRequest): Observable<User> {
     return this.httpClient.post<User>(this.HOST + '/api/login/create', login).pipe()
+  }
+
+  change(changePasswordRequest: ChangePasswordRequest) {
+    return this.httpClient.post<ResponseToken>(this.HOST + '/api/login/change', changePasswordRequest, {'headers': this.HEADERS})
+      .pipe(map(token => {
+        this.tokenSubject.next(token)
+        return token
+      }))
   }
 }

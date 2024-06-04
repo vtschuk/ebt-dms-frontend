@@ -1,14 +1,14 @@
-<table mat-table [dataSource]="files" class="selected-files-table">
+<table [dataSource]="files" class="selected-files-table" mat-table>
   <!-- Name Column -->
   <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name</th>
-    <td mat-cell *matCellDef="let file"> {{file.name}} </td>
+    <th *matHeaderCellDef mat-header-cell> Name</th>
+    <td *matCellDef="let file" mat-cell> {{file.name}} </td>
   </ng-container>
 
   <!-- Type Column -->
   <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef> Type</th>
-    <td mat-cell *matCellDef="let file"> {{file.type}} </td>
+    <th *matHeaderCellDef mat-header-cell> Type</th>
+    <td *matCellDef="let file" mat-cell> {{file.type}} </td>
   </ng-container>
 
   <!-- Size Column -->
@@ -24,13 +24,13 @@
   </ng-container -->
 
   <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Actions</th>
-    <td mat-cell *matCellDef="let file">
-      <button mat-button (click)="viewFile(file)">View</button>
-      <button mat-button (click)="deleteFile(file)">Delete</button>
+    <th *matHeaderCellDef mat-header-cell>Actions</th>
+    <td *matCellDef="let file" mat-cell>
+      <button (click)="viewFile(file)" mat-button>View</button>
+      <button (click)="deleteFile(file)" mat-button>Delete</button>
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="_displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: _displayedColumns;"></tr>
+  <tr *matHeaderRowDef="_displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: _displayedColumns;" mat-row></tr>
 </table>

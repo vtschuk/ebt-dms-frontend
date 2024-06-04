@@ -1,24 +1,24 @@
 <div class="admin-buttons">
-  <button mat-stroked-button color="primary" (click)="gotoFileList()" matTooltip="Aktenliste aufrufen">Aktenliste
+  <button (click)="gotoFileList()" color="primary" mat-stroked-button matTooltip="Aktenliste aufrufen">Aktenliste
   </button>
-  <button mat-stroked-button color="primary" (click)="gotoArchivList()" matTooltip="Aktenliste aufrufen">Archivliste
+  <button (click)="gotoArchivList()" color="primary" mat-stroked-button matTooltip="Aktenliste aufrufen">Archivliste
   </button>
 
-  <button mat-stroked-button color="primary" (click)="logout()" matTooltip="aktuellen Benutzer abmelden">Abmelden
+  <button (click)="logout()" color="primary" mat-stroked-button matTooltip="aktuellen Benutzer abmelden">Abmelden
   </button>
-  <button mat-stroked-button color="primary" (click)="about()" matTooltip="Info über das Programm aufrufen">Info
+  <button (click)="about()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">Info
   </button>
-  <button mat-stroked-button color="primary" (click)="getSupport()" matTooltip="Info über das Programm aufrufen">Support
+  <button (click)="getSupport()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">Support
   </button>
 </div>
 <h2>Benutzermanagement</h2>
 <div class="user-container">
   <div>
     System Benutzer
-    <button mat-mini-fab color="primary" (click)="addUserDialog()">
+    <button (click)="addUserDialog()" color="primary" mat-mini-fab>
       <mat-icon>add_person</mat-icon>
     </button>
-    <button mat-button color="primary" (click)="changePassword()">
+    <button (click)="changePassword()" color="primary" mat-button>
       Reset Password
     </button>
   </div>
@@ -37,12 +37,12 @@
           {{user.username2}}
         </td>
         <td>
-          <button mat-mini-fab color="primary" (click)="editUserDialog(user)">
+          <button (click)="editUserDialog(user)" color="primary" mat-mini-fab>
             <mat-icon matListItemIcon> person</mat-icon>
           </button>
         </td>
         <td>
-          <button mat-mini-fab color="primary" (click)="deleteLogin(user)">
+          <button (click)="deleteLogin(user)" color="primary" mat-mini-fab>
             <mat-icon matListItemIcon> delete</mat-icon>
           </button>
         </td>
@@ -56,8 +56,8 @@
 <h2> System Management </h2>
 <div class="system-container">
   <mat-form-field>
-    <mat-label> Sprachen </mat-label>
-    <mat-select [formControl]="languageFormControl" [(value)]="selectedLang" required>
+    <mat-label> Sprachen</mat-label>
+    <mat-select [(value)]="selectedLang" [formControl]="languageFormControl" required>
       <mat-option *ngFor="let  lang of languages | async" [value]="lang"> {{lang.name}}</mat-option>
     </mat-select>
   </mat-form-field>

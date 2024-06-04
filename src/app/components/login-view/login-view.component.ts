@@ -25,16 +25,16 @@ export class LoginViewComponent implements OnInit {
   ) {
   }
 
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.form.controls;
+  }
+
   ngOnInit() {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-  }
-
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.form.controls;
   }
 
   onSubmit() {

@@ -114,7 +114,7 @@ export class AdminViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         console.log('delete Login')
-        this.userService.delete(user.id).subscribe(()=> {
+        this.userService.delete(user.id).subscribe(() => {
           this.users = this.adminService.getAllUsers();
           console.log('delete user ' + user)
         })

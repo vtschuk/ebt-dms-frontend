@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {UserEditDialogContentComponent} from "../user-edit-dialog-content/user-edit-dialog-content.component";
 import {User} from "../../../model/user";
-
 
 
 @Component({
@@ -14,7 +13,8 @@ import {User} from "../../../model/user";
   imports: [MatButtonModule, MatDialogModule],
 })
 export class UserEditDialogComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {
+  }
 
   openDialog(user: User) {
     this.dialog.open(UserEditDialogContentComponent, {

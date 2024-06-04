@@ -72,25 +72,6 @@ export class FileEditComponent implements OnInit {
     this._selectedFiles = [];
   }
 
-  private loadFile(id: number) {
-    if (id != 0) {
-      this.personService.getFileById(id).subscribe(data => {
-        console.log(data)
-        this.currentFile = data
-        if (this.currentFile.date) {
-          const date = new Date(this.currentFile.date);
-          this.date = moment(date).format('YYYY-MM-DD')
-        }
-
-        this.uploadDocFilesService.getFileListByPersonId(this.currentFile.id).subscribe(filelist => {
-          this._selectedFiles = filelist;
-        })
-      }, () => {
-        this.toastr.error('kann keine Person mit der ID' + id + ' finden')
-      });
-    }
-  }
-
   onSubmit() {
     this.submitted = true;
   }
@@ -214,5 +195,24 @@ export class FileEditComponent implements OnInit {
 
   encryptFile() {
     this.toastr.error("Diese Funktion ist noch nicht implementiert")
+  }
+
+  private loadFile(id: number) {
+    if (id != 0) {
+      this.personService.getFileById(id).subscribe(data => {
+        console.log(data)
+        this.currentFile = data
+        if (this.currentFile.date) {
+          const date = new Date(this.currentFile.date);
+          this.date = moment(date).format('YYYY-MM-DD')
+        }
+
+        this.uploadDocFilesService.getFileListByPersonId(this.currentFile.id).subscribe(filelist => {
+          this._selectedFiles = filelist;
+        })
+      }, () => {
+        this.toastr.error('kann keine Person mit der ID' + id + ' finden')
+      });
+    }
   }
 }

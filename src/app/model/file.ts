@@ -1,4 +1,4 @@
- export class File {
+export class File {
   constructor(
     public id: number,
     public filenumber: string,
@@ -8,7 +8,6 @@
     public description: string,
     public archive: boolean,
     public encrypted: boolean
-
   ) {
   }
 }

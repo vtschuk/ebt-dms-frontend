@@ -9,7 +9,6 @@ import {UserService} from "../../../services/user.service";
 import {MatButtonModule} from "@angular/material/button";
 import {UserEditDialogComponent} from "../user-edit-dialog/user-edit-dialog.component";
 import {LoginService} from "../../../services";
-import {RegisterLoginRequest} from "../../../model/register.login.request";
 
 @Component({
   selector: 'app-user-edit-dialog-content',
@@ -32,6 +31,28 @@ export class UserEditDialogContentComponent {
     this.updateValues(user)
   }
 
+  saveLogin() {
+    const user = {
+      id: this.id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      username2: this.username2,
+      role: this.role,
+      password2: this.password2
+    }
+    console.log("save login")
+    this.userService.save(user).subscribe(data => {
+      //this.updateValues(data)
+      this.dialogRef.close()
+    })
+
+  }
+
+  abort() {
+    this.dialogRef.close()
+  }
+
   private updateValues(user: User) {
     this.id = user.id
     this.firstName = user.firstName || ''
@@ -40,27 +61,5 @@ export class UserEditDialogContentComponent {
     this.username2 = user.username2
     this.role = user.role
     this.password2 = user.password2
-  }
-
-  saveLogin() {
-      const user = {
-        id: this.id,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        username2: this.username2,
-        role: this.role,
-        password2: this.password2
-      }
-      console.log("save login")
-      this.userService.save(user).subscribe(data => {
-        //this.updateValues(data)
-        this.dialogRef.close()
-      })
-
-  }
-
-  abort() {
-    this.dialogRef.close()
   }
 }

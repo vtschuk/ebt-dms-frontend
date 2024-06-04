@@ -1,6 +1,7 @@
 .login-view {
   display: grid;
 }
+
 .login-window {
   display: flex;
   justify-content: center;

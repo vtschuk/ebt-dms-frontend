@@ -1,42 +1,46 @@
 <div>
-  <button mat-stroked-button color="primary" type="submit" (click)="getPreviousEntry()"
-          matTooltip="vorherige Akte aus der Liste aufrufen"> Vorherige Akte
+  <button (click)="getPreviousEntry()" color="primary" mat-stroked-button
+          matTooltip="vorherige Akte aus der Liste aufrufen"
+          type="submit"> Vorherige Akte
   </button>
-  <button mat-stroked-button color="primary" type="submit"
-            (click)="saveEntry()"
-          matTooltip="Info about the action"> Speichern
+  <button (click)="saveEntry()" color="primary" mat-stroked-button
+          matTooltip="Info about the action"
+          type="submit"> Speichern
   </button>
-  <button mat-stroked-button color="primary" (click)="reload()" matTooltip="Aktenänderungen verwerfen (Akte neu laden)">
+  <button (click)="reload()" color="primary" mat-stroked-button matTooltip="Aktenänderungen verwerfen (Akte neu laden)">
     Verwerfen
   </button>
-  <button mat-stroked-button color="warn" type="submit" (click)="archivEntry()"
-          matTooltip="Akte archiveren (Akte wird nicht mehr aufgelistet)"> Archivieren
+  <button (click)="archivEntry()" color="warn" mat-stroked-button
+          matTooltip="Akte archiveren (Akte wird nicht mehr aufgelistet)"
+          type="submit"> Archivieren
   </button>
-  <button mat-stroked-button color="warn" type="submit" (click)="deleteEntry()" matTooltip="Akte komplett löschen">
+  <button (click)="deleteEntry()" color="warn" mat-stroked-button matTooltip="Akte komplett löschen" type="submit">
     Löschen
   </button>
-  <button mat-stroked-button color="primary" type="submit" (click)="listEntries()" matTooltip="Aktenliste aufrufen">
+  <button (click)="listEntries()" color="primary" mat-stroked-button matTooltip="Aktenliste aufrufen" type="submit">
     Aktenliste
   </button>
-  <button mat-stroked-button color="primary" type="submit" (click)="viewEntry()" matTooltip="Aktenübersicht aufrufen">
+  <button (click)="viewEntry()" color="primary" mat-stroked-button matTooltip="Aktenübersicht aufrufen" type="submit">
     Akte
   </button>
-  <button #buttonPicker="appFilepicker" mat-raised-button color="primary" appFilepicker [multiple]="_multiple"
-          (filesChanged)="_onFilesChanged($event)" (filesReset)="_onReset()"
+  <button #buttonPicker="appFilepicker" (filesChanged)="_onFilesChanged($event)" (filesReset)="_onReset()"
+          [multiple]="_multiple" appFilepicker
+          color="primary" mat-raised-button
           matTooltip="Unterlagen zur Akte hinzufügen">
     Unterlagen
   </button>
-  <button mat-stroked-button color="primary" (click)="encryptFile()" matTooltip="Akte mit Passwort verschlüsseln">
+  <button (click)="encryptFile()" color="primary" mat-stroked-button matTooltip="Akte mit Passwort verschlüsseln">
     Verschlüsselung
   </button>
-  <button mat-stroked-button color="primary" type="submit" (click)="getNextEntry()"
-          matTooltip="nächste Akte aus der Liste aufrufen"> Nächste Akte
+  <button (click)="getNextEntry()" color="primary" mat-stroked-button matTooltip="nächste Akte aus der Liste aufrufen"
+          type="submit"> Nächste Akte
   </button>
-  <button mat-button color="primary" (click)="about()" matTooltip="Info über das Programm aufrufen">Info</button>
-  <button mat-stroked-button color="warn" (click)="administrate()"
+  <button (click)="about()" color="primary" mat-button matTooltip="Info über das Programm aufrufen">Info</button>
+  <button (click)="administrate()" color="warn" mat-stroked-button
           matTooltip="Administration aufrufen (Richtige Rolle notwendig)"> Administration
   </button>
-  <button mat-stroked-button color="primary" (click)="getSupport()" matTooltip="Support für das Programm aufrufen">Support
+  <button (click)="getSupport()" color="primary" mat-stroked-button matTooltip="Support für das Programm aufrufen">
+    Support
   </button>
 </div>
 

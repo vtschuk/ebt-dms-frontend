@@ -1,31 +1,32 @@
 <div>
-  <button mat-stroked-button color="primary" (click)="getPreviousEntry()"
+  <button (click)="getPreviousEntry()" color="primary" mat-stroked-button
           matTooltip="vorherige Akte aus der Liste aufrufen"> Vorherige Akte
   </button>
-  <button mat-stroked-button color="primary" (click)="listEntries()" matTooltip="Aktenliste aufrufen"> Aktenliste
+  <button (click)="listEntries()" color="primary" mat-stroked-button matTooltip="Aktenliste aufrufen"> Aktenliste
   </button>
-  <button mat-stroked-button color="warn" (click)="editFile()" matTooltip="Akte bearbeiten (Richtige Rolle notwendig)">
+  <button (click)="editFile()" color="warn" mat-stroked-button matTooltip="Akte bearbeiten (Richtige Rolle notwendig)">
     Bearbeiten
   </button>
-  <button mat-stroked-button color="primary" (click)="createPdf()" matTooltip="Akte ins PDF konvertieren"> PDF</button>
-  <button mat-stroked-button color="primary" (click)="downloadPersonFile()" matTooltip="Akte als ZIP komplett aufrufen">
+  <button (click)="createPdf()" color="primary" mat-stroked-button matTooltip="Akte ins PDF konvertieren"> PDF</button>
+  <button (click)="downloadPersonFile()" color="primary" mat-stroked-button matTooltip="Akte als ZIP komplett aufrufen">
     Download
   </button>
-  <button mat-stroked-button color="primary" (click)="sendFile()" matTooltip="Akte als E-Mail anhang versenden">
+  <button (click)="sendFile()" color="primary" mat-stroked-button matTooltip="Akte als E-Mail anhang versenden">
     Senden
   </button>
-  <button mat-stroked-button color="primary" (click)="linkFile()" matTooltip="Akte über Link abrufen">
+  <button (click)="linkFile()" color="primary" mat-stroked-button matTooltip="Akte über Link abrufen">
     Webzugriff
   </button>
 
-  <button mat-stroked-button color="primary" (click)="getNextEntry()" matTooltip="nächste Akte aus der Liste aufrufen">
+  <button (click)="getNextEntry()" color="primary" mat-stroked-button matTooltip="nächste Akte aus der Liste aufrufen">
     Nächste Akte
   </button>
-  <button mat-button color="primary" (click)="about()" matTooltip="Info über das Programm aufrufen">Info</button>
-  <button mat-stroked-button color="warn" (click)="administrate()"
+  <button (click)="about()" color="primary" mat-button matTooltip="Info über das Programm aufrufen">Info</button>
+  <button (click)="administrate()" color="warn" mat-stroked-button
           matTooltip="Administration aufrufen (Richtige Rolle notwendig)"> Administration
   </button>
-  <button mat-stroked-button color="primary" (click)="getSupport()" matTooltip="Support für das Programm aufrufen">Support
+  <button (click)="getSupport()" color="primary" mat-stroked-button matTooltip="Support für das Programm aufrufen">
+    Support
   </button>
 </div>
 
@@ -47,7 +48,7 @@
   </mat-card>
   <div>
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%">
+      <div fxFlex="25%" fxFlex.sm="33%" fxFlex.xs="100%">
         <mat-card class="mat-elevation-z4">
           <mat-card-actions>
 

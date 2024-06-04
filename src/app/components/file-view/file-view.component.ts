@@ -18,7 +18,7 @@ export class FileViewComponent implements OnInit {
   @ViewChild('htmlData')
   htmlData!: ElementRef;
 
-  currentFile: File = new File(0, '', '', '', new Date().toISOString(), '',false, false);
+  currentFile: File = new File(0, '', '', '', new Date().toISOString(), '', false, false);
 
   constructor(private fileService: FileService,
               private router: Router,

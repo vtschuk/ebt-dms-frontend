@@ -20,8 +20,63 @@ import {coerceBooleanProperty} from '@angular/cdk/coercion';
 })
 export class FilepickerDirective implements OnDestroy, OnChanges {
 
+  /**
+   * File list emitted on change.
+   * **/
+  @Output()
+  filesChanged = new EventEmitter<FileList>();
+  /**
+   * File list emitted on change.
+   * **/
+  @Output()
+  filesReset = new EventEmitter();
   // @ts-ignore
   private _form: HTMLFormElement;
+
+  constructor(
+    @Optional() @Inject(DOCUMENT) private _document: Document,
+  ) {
+    if (this._document) {
+      this._form = this._document.createElement('form');
+      this._nativeFileElement = this._document.createElement('input');
+      this._nativeFileElement.type = 'file';
+      this._nativeFileElement.multiple = this.multiple;
+      this._nativeFileElement.addEventListener('change', this._onFilesChanged);
+      this._form.appendChild(this.nativeFileElement);
+    }
+  }
+
+  private _multiple = false;
+
+  get multiple() {
+    return this._multiple;
+  }
+
+  /**
+   * Allow multiple file selection. Defaults to `false`.
+   * **/
+  @Input()
+  set multiple(val: boolean) {
+    this._multiple = coerceBooleanProperty(val);
+  }
+
+  /**
+   * Selected Files
+   **/
+  get files(): FileList | undefined {
+    // @ts-ignore
+    return this._nativeFileElement.files;
+  }
+
+  // @ts-ignore
+  private _nativeFileElement: HTMLInputElement;
+
+  /**
+   * Native input[type=file] element.
+   **/
+  get nativeFileElement() {
+    return this._nativeFileElement;
+  }
 
   /**
    * Prevent dragover event so drop events register.
@@ -53,69 +108,6 @@ export class FilepickerDirective implements OnDestroy, OnChanges {
     this._nativeFileElement.click();
   }
 
-  /**
-   * Allow multiple file selection. Defaults to `false`.
-   * **/
-  @Input()
-  set multiple(val: boolean) {
-    this._multiple = coerceBooleanProperty(val);
-  }
-
-  get multiple() {
-    return this._multiple;
-  }
-
-  private _multiple = false;
-
-  /**
-   * File list emitted on change.
-   * **/
-  @Output()
-  filesChanged = new EventEmitter<FileList>();
-
-  /**
-   * File list emitted on change.
-   * **/
-  @Output()
-  filesReset = new EventEmitter();
-
-  /**
-   * Selected Files
-   **/
-  get files(): FileList | undefined {
-    // @ts-ignore
-    return this._nativeFileElement.files;
-  }
-
-  /**
-   * Native input[type=file] element.
-   **/
-  get nativeFileElement() {
-    return this._nativeFileElement;
-  }
-
-  // @ts-ignore
-  private _nativeFileElement: HTMLInputElement;
-
-  private _onFilesChanged = () => {
-    // @ts-ignore
-    this.filesChanged.emit(this._nativeFileElement.files);
-  };
-
-
-  constructor(
-    @Optional() @Inject(DOCUMENT) private _document: Document,
-  ) {
-    if (this._document) {
-      this._form = this._document.createElement('form');
-      this._nativeFileElement = this._document.createElement('input');
-      this._nativeFileElement.type = 'file';
-      this._nativeFileElement.multiple = this.multiple;
-      this._nativeFileElement.addEventListener('change', this._onFilesChanged);
-      this._form.appendChild(this.nativeFileElement);
-    }
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes.multiple) {
       this._nativeFileElement.multiple = this.multiple;
@@ -135,5 +127,10 @@ export class FilepickerDirective implements OnDestroy, OnChanges {
     this._form.reset();
     this.filesReset.emit();
   }
+
+  private _onFilesChanged = () => {
+    // @ts-ignore
+    this.filesChanged.emit(this._nativeFileElement.files);
+  };
 
 }

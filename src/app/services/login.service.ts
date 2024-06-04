@@ -14,10 +14,9 @@ export class LoginService {
 
   HOST = 'http://localhost:9090'
   HEADERS = {'content-type': 'application/json'}
-
+  public token: Observable<ResponseToken | null>
   //Token
   private tokenSubject: BehaviorSubject<ResponseToken | null>;
-  public token: Observable<ResponseToken | null>
 
   constructor(private router: Router, private httpClient: HttpClient) {
     this.tokenSubject = new BehaviorSubject<ResponseToken | null>(null);

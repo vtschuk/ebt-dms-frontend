@@ -3,9 +3,9 @@
     <form class="form-group">
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input type="text"
+        <input [(ngModel)]="lastName"
                matInput
-               [(ngModel)]="lastName" name="lastName"
+               name="lastName" type="text"
         >
       </mat-form-field>
     </form>
@@ -13,52 +13,52 @@
     <form class="form-group">
       <mat-form-field>
         <mat-label>Vorname</mat-label>
-        <input type="text"
+        <input [(ngModel)]="firstName"
                matInput
-               [(ngModel)]="firstName" name="firstName">
+               name="firstName" type="text">
       </mat-form-field>
     </form>
 
     <form class="form-group">
       <mat-form-field>
         <mat-label>E-Mail</mat-label>
-        <input type="text"
+        <input [(ngModel)]="email"
                matInput
-               [(ngModel)]="email" name="email">
+               name="email" type="text">
       </mat-form-field>
     </form>
 
     <form class="form-group">
       <mat-form-field>
         <mat-label>Login</mat-label>
-        <input type="text"
+        <input [(ngModel)]="username2"
                matInput
-               [(ngModel)]="username2" name="username2">
+               name="username2" type="text">
       </mat-form-field>
     </form>
 
     <form class="form-group">
       <mat-form-field>
         <mat-label>Rolle</mat-label>
-        <input type="text"
+        <input [value]="role"
                matInput
-               [value]="role">
+               type="text">
       </mat-form-field>
     </form>
 
     <form class="form-group">
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="password"
+        <input [required]="user.id == 0"
+               [value]="password2"
                matInput
-               [required]="user.id == 0"
-               [value]="password2">
+               type="password">
       </mat-form-field>
     </form>
 
   </form>
   <form>
-    <button mat-stroked-button (click)="saveLogin()" style="align-self: center"> Speichern</button>
-    <button mat-stroked-button (click)="abort()" style="align-self: center"> Abbrechen</button>
+    <button (click)="saveLogin()" mat-stroked-button style="align-self: center"> Speichern</button>
+    <button (click)="abort()" mat-stroked-button style="align-self: center"> Abbrechen</button>
   </form>
 </div>

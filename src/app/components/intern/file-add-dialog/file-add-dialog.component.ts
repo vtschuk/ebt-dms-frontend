@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {File} from "../../../model/file";
 import {FileService} from "../../../services/file.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -18,8 +18,9 @@ export class FileAddDialogComponent {
               public dialog: MatDialog,
               private toastr: ToastrService,
               public dialogRef: MatDialogRef<FileAddDialogComponent>
-    ) {
+  ) {
   }
+
   createFile() {
     const file = new File(0,
       this.filenumber,

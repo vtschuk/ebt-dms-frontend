@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {UserService} from "../../../services/user.service";
 import {LoginService} from "../../../services";
@@ -19,6 +19,7 @@ export class UserAddDialogContentComponent {
   username: string = ''
   role: string = ''
   password: string = ''
+
   constructor(private userService: UserService, private loginService: LoginService, public dialogRef: MatDialogRef<UserEditDialogComponent>) {
 
   }

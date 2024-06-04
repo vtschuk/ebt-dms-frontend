@@ -22,17 +22,16 @@ import {FilepickerDirective} from './directives/filepicker.directive';
 import {SelectedFilesTableComponent} from './components/selected-files-table/selected-files-table.component';
 import {JwtInterceptor} from "./services/auth/jwt.interceptor";
 import {ErrorInterceptor} from "./services/auth/error.interceptor";
-import { ConfirmDialogComponent } from './components/intern/confirm-dialog/confirm-dialog.component';
-import { UserEditDialogComponent } from './components/intern/user-edit-dialog/user-edit-dialog.component';
-import { UserEditDialogContentComponent } from './components/intern/user-edit-dialog-content/user-edit-dialog-content.component';
-import { UserAddDialogComponent } from './components/intern/user-add-dialog/user-add-dialog.component';
-import { SupportDialogComponent } from './components/intern/support-dialog/support-dialog.component';
-import { InfoDialogComponent } from './components/intern/info-dialog/info-dialog.component';
-import { HelpDialogComponent } from './components/intern/help-dialog/help-dialog.component';
-import { DocsDialogComponent } from './components/intern/docs-dialog/docs-dialog.component';
-import { FileAddDialogComponent } from './components/intern/file-add-dialog/file-add-dialog.component';
-import { UserAddDialogContentComponent } from './components/intern/user-add-dialog-content/user-add-dialog-content.component';
-import { ResetPasswordDialogComponent } from './components/intern/reset-password-dialog/reset-password-dialog.component';
+import {ConfirmDialogComponent} from './components/intern/confirm-dialog/confirm-dialog.component';
+import {UserAddDialogComponent} from './components/intern/user-add-dialog/user-add-dialog.component';
+import {SupportDialogComponent} from './components/intern/support-dialog/support-dialog.component';
+import {HelpDialogComponent} from './components/intern/help-dialog/help-dialog.component';
+import {DocsDialogComponent} from './components/intern/docs-dialog/docs-dialog.component';
+import {FileAddDialogComponent} from './components/intern/file-add-dialog/file-add-dialog.component';
+import {
+  UserAddDialogContentComponent
+} from './components/intern/user-add-dialog-content/user-add-dialog-content.component';
+import {ResetPasswordDialogComponent} from './components/intern/reset-password-dialog/reset-password-dialog.component';
 
 @NgModule({
   declarations: [

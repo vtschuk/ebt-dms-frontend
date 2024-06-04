@@ -7,6 +7,6 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-raised-button cdkFocusInitial (click)="onDismiss()">No</button>
-  <button mat-raised-button (click)="onConfirm()">Yes</button>
+  <button (click)="onDismiss()" cdkFocusInitial mat-raised-button>No</button>
+  <button (click)="onConfirm()" mat-raised-button>Yes</button>
 </div>

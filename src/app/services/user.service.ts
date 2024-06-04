@@ -14,4 +14,9 @@ export class UserService {
   save(user: User): Observable<User> {
     return  this.httpClient.put<User>(this.HOST + '/api/user/' + user.id, user).pipe()
   }
+
+  delete(id: number) {
+    return this.httpClient.delete(this.HOST + '/api/user/'+ id).pipe()
+  }
+
 }

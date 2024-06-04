@@ -31,6 +31,8 @@ import { InfoDialogComponent } from './components/intern/info-dialog/info-dialog
 import { HelpDialogComponent } from './components/intern/help-dialog/help-dialog.component';
 import { DocsDialogComponent } from './components/intern/docs-dialog/docs-dialog.component';
 import { FileAddDialogComponent } from './components/intern/file-add-dialog/file-add-dialog.component';
+import { UserAddDialogContentComponent } from './components/intern/user-add-dialog-content/user-add-dialog-content.component';
+import { ResetPasswordDialogComponent } from './components/intern/reset-password-dialog/reset-password-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { FileAddDialogComponent } from './components/intern/file-add-dialog/file
     HelpDialogComponent,
     DocsDialogComponent,
     FileAddDialogComponent,
+    UserAddDialogContentComponent,
+    ResetPasswordDialogComponent,
   ],
   imports: [
     BrowserModule,

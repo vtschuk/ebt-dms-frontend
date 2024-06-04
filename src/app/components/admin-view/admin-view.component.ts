@@ -19,11 +19,11 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSelectModule} from "@angular/material/select";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
-import {UserEditDialogComponent} from "../intern/user-edit-dialog/user-edit-dialog.component";
 import {ToastrService} from "ngx-toastr";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
-import {UserAddDialogComponent} from "../intern/user-add-dialog/user-add-dialog.component";
 import {UserEditDialogContentComponent} from "../intern/user-edit-dialog-content/user-edit-dialog-content.component";
+import {UserService} from "../../services/user.service";
+import {UserAddDialogContentComponent} from "../intern/user-add-dialog-content/user-add-dialog-content.component";
 
 @Component({
   selector: 'app-admin-view',
@@ -67,9 +67,18 @@ export class AdminViewComponent implements OnInit {
   roleFormControl = new FormControl('');
 
   passwd = ''
+  protected readonly name = name;
 
-  constructor(private adminService: AdminService, private router: Router, public dialog: MatDialog, private loginService: LoginService, private toastr: ToastrService) {
+  constructor(private adminService: AdminService,
+              private router: Router,
+              public dialog: MatDialog,
+              private loginService: LoginService,
+              private userService: UserService,
+              private toastr: ToastrService) {
   }
+
+
+  //--------------------------------------------------------------------------------------------------------------------
 
   ngOnInit(): void {
     console.log('onInit')
@@ -78,8 +87,8 @@ export class AdminViewComponent implements OnInit {
     this.users = this.adminService.getAllUsers()
   }
 
-
   //--------------------------------------------------------------------------------------------------------------------
+
   // Language
   changeLanguage() {
     console.log(this.currentLanguage)
@@ -88,13 +97,12 @@ export class AdminViewComponent implements OnInit {
     })
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
   // Language
   saveLogin() {
     console.log('create Login')
   }
 
-  deleteLogin() {
+  deleteLogin(user: User) {
 
     const dialogData = new ConfirmDialogModel('Confirm', 'Are you sure you want to delete user?');
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -106,6 +114,10 @@ export class AdminViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         console.log('delete Login')
+        this.userService.delete(user.id).subscribe(()=> {
+          this.users = this.adminService.getAllUsers();
+          console.log('delete user ' + user)
+        })
       }
     });
 
@@ -116,7 +128,6 @@ export class AdminViewComponent implements OnInit {
     this.router.navigate(['/view'])
   }
 
-
   logout() {
     this.loginService.logout()
   }
@@ -125,21 +136,21 @@ export class AdminViewComponent implements OnInit {
     this.dialog.open(InfoDialogComponent);
   }
 
-
-  protected readonly name = name;
-
   editUserDialog(user: User) {
     this.dialog.open(UserEditDialogContentComponent, {
       disableClose: true,
       data: user
-    }).afterClosed().subscribe( () => {
+    }).afterClosed().subscribe(() => {
       this.users = this.adminService.getAllUsers();
     })
   }
 
   addUserDialog() {
-    const userDialog = new UserAddDialogComponent(this.dialog)
-    userDialog.openDialog(this.currentUser)
+    this.dialog.open(UserAddDialogContentComponent, {
+      disableClose: true
+    }).afterClosed().subscribe(() => {
+      this.users = this.adminService.getAllUsers();
+    })
   }
 
   gotoArchivList() {
@@ -148,5 +159,9 @@ export class AdminViewComponent implements OnInit {
 
   getSupport() {
     this.toastr.error("Diese Funktion ist noch nicht implementiert")
+  }
+
+  changePassword() {
+
   }
 }

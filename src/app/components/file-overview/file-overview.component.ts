@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {IFile, File} from '../../model/file';
+import {IFile} from '../../model/file';
 import {FileService} from '../../services/file.service';
 import {Router, RouterModule} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -59,13 +59,14 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
       this.toastr.error("kann keine Aktenliste abrufen")
     });
   }
+
   addNewEntry() {
-      this.dialog.open(FileAddDialogComponent, {
-        maxWidth: '450px',
-        minHeight: '350px',
-        closeOnNavigation: true,
-        disableClose: true,
-        data: null
+    this.dialog.open(FileAddDialogComponent, {
+      maxWidth: '450px',
+      minHeight: '350px',
+      closeOnNavigation: true,
+      disableClose: true,
+      data: null
     }).afterClosed().subscribe(() => this.refreshView())
   }
 
@@ -105,5 +106,9 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
 
   getSupport() {
     this.toastr.error("Diese Funktion ist noch nicht implementiert")
+  }
+
+  getDocu() {
+
   }
 }

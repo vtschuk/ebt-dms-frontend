@@ -18,6 +18,9 @@
     <button mat-mini-fab color="primary" (click)="addUserDialog()">
       <mat-icon>add_person</mat-icon>
     </button>
+    <button mat-button color="primary" (click)="changePassword()">
+      Reset Password
+    </button>
   </div>
   <div>
     <table>
@@ -39,7 +42,7 @@
           </button>
         </td>
         <td>
-          <button mat-mini-fab color="primary" (click)="deleteLogin()">
+          <button mat-mini-fab color="primary" (click)="deleteLogin(user)">
             <mat-icon matListItemIcon> delete</mat-icon>
           </button>
         </td>

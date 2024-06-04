@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {ResponseToken} from "../model/responsetoken";
 import {Router} from "@angular/router";
+import {User} from "../model/user";
+import {RegisterLoginRequest} from "../model/register.login.request";
 
 
 @Injectable({
@@ -42,5 +44,9 @@ export class LoginService {
     console.log("logout....")
     this.tokenSubject.next(null);
     this.router.navigate(['/login']);
+  }
+
+  create(login: RegisterLoginRequest): Observable<User> {
+    return this.httpClient.post<User>(this.HOST + '/api/login/create', login).pipe()
   }
 }

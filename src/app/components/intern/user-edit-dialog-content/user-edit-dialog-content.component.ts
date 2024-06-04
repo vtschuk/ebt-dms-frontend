@@ -8,6 +8,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {UserService} from "../../../services/user.service";
 import {MatButtonModule} from "@angular/material/button";
 import {UserEditDialogComponent} from "../user-edit-dialog/user-edit-dialog.component";
+import {LoginService} from "../../../services";
+import {RegisterLoginRequest} from "../../../model/register.login.request";
 
 @Component({
   selector: 'app-user-edit-dialog-content',
@@ -26,7 +28,7 @@ export class UserEditDialogContentComponent {
   role: string = ''
   password2: string = ''
 
-  constructor(@Inject(MAT_DIALOG_DATA) public user: User, private userService: UserService, public dialogRef: MatDialogRef<UserEditDialogComponent> ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public user: User, private userService: UserService, private loginService: LoginService, public dialogRef: MatDialogRef<UserEditDialogComponent>) {
     this.updateValues(user)
   }
 
@@ -39,13 +41,23 @@ export class UserEditDialogContentComponent {
     this.role = user.role
     this.password2 = user.password2
   }
+
   saveLogin() {
-    console.log("save login")
-    const user = {id: this.id, firstName: this.firstName, lastName: this.lastName, email: this.email, username2: this.username2, role: this.role, password2: this.password2}
-    this.userService.save(user).subscribe(data => {
-      this.updateValues(data)
-      this.dialogRef.close()
-    })
+      const user = {
+        id: this.id,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        username2: this.username2,
+        role: this.role,
+        password2: this.password2
+      }
+      console.log("save login")
+      this.userService.save(user).subscribe(data => {
+        //this.updateValues(data)
+        this.dialogRef.close()
+      })
+
   }
 
   abort() {

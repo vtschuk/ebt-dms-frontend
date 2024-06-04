@@ -57,7 +57,7 @@ export class AdminViewComponent implements OnInit {
 
   // User, Role, Password
 
-  currentUser: User = {id: 0, username2: '', role: '', password2: ''}
+  currentUser: User = {id: 0, firstName: '', lastName: '', email: '', username2: '', role: '', password2: ''}
   //currentUser: User = {id:0, username: ''}
   userFormControl = new FormControl('');
   users: Observable<User[]> = of()
@@ -72,8 +72,8 @@ export class AdminViewComponent implements OnInit {
   constructor(private adminService: AdminService,
               private router: Router,
               public dialog: MatDialog,
-              private loginService: LoginService,
-              private userService: UserService,
+              public loginService: LoginService,
+              public userService: UserService,
               private toastr: ToastrService) {
   }
 
@@ -85,6 +85,7 @@ export class AdminViewComponent implements OnInit {
     this.languages = this.adminService.getAllLanguages();
     this.roles = this.adminService.getAllRoles();
     this.users = this.adminService.getAllUsers()
+    this.userService.get(this.loginService.loginValue?.userId || 0).subscribe(user => this.currentUser = user)
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -162,6 +163,10 @@ export class AdminViewComponent implements OnInit {
   }
 
   changePassword() {
+
+  }
+
+  getDocu() {
 
   }
 }

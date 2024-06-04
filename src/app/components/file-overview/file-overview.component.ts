@@ -14,14 +14,16 @@ import {MatDividerModule} from "@angular/material/divider";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 import {FileAddDialogComponent} from "../intern/file-add-dialog/file-add-dialog.component";
-import {DatePipe} from "@angular/common";
+import {AsyncPipe, DatePipe} from "@angular/common";
+import {UserService} from "../../services/user.service";
+import {User} from "../../model/user";
 
 @Component({
   selector: 'app-file-overview',
   templateUrl: './file-overview.component.html',
   styleUrls: ['./file-overview.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe, AsyncPipe],
 })
 export class FileOverviewComponent implements OnInit, AfterViewInit {
 
@@ -30,6 +32,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<IFile> = new MatTableDataSource<IFile>(this.files);
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{}
+  currentUser: User = {id: 0, firstName: '', lastName: '', email: '', role: '', username2: '', password2: ''};
 
   constructor(
     private fileService: FileService,
@@ -37,7 +40,8 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService,
     private router: Router,
     public dialog: MatDialog,
-    private loginService: LoginService) {
+    public userService: UserService,
+    public loginService: LoginService) {
 
   }
 
@@ -58,6 +62,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     }, () => {
       this.toastr.error("kann keine Aktenliste abrufen")
     });
+    this.userService.get(this.loginService.loginValue?.userId || 0).subscribe(user => this.currentUser = user)
   }
 
   addNewEntry() {

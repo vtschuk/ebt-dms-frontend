@@ -13,6 +13,10 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
+  get(id: number): Observable<User> {
+    return this.httpClient.get<User>(this.HOST + '/api/user/' + id).pipe()
+  }
+
   save(user: User): Observable<User> {
     return this.httpClient.put<User>(this.HOST + '/api/user/' + user.id, user).pipe()
   }

@@ -10,7 +10,14 @@
   </button>
   <button (click)="getSupport()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">Support
   </button>
+  <button (click)="getDocu()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">
+    Dokumentation
+  </button>
+  <span>
+    Angemeldet als {{currentUser.firstName}} {{currentUser.lastName}}
+  </span>
 </div>
+
 <h2>Benutzermanagement</h2>
 <div class="user-container">
   <div>

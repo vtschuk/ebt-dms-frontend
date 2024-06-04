@@ -5,7 +5,10 @@
   <button (click)="about()" color="primary" mat-button>Info</button>
   <button (click)="getSupport()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">Support
   </button>
-  <button (click)="getDocu()"> Dokumentation</button>
+  <button (click)="getDocu()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">
+    Dokumentation
+  </button>
+  <span> Angemeldet als  {{currentUser.firstName}} </span>
 </div>
 
 <div class="example-container mat-elevation-z8">

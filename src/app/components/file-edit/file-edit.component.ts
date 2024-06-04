@@ -197,6 +197,10 @@ export class FileEditComponent implements OnInit {
     this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
 
+  getDocu() {
+
+  }
+
   private loadFile(id: number) {
     if (id != 0) {
       this.personService.getFileById(id).subscribe(data => {

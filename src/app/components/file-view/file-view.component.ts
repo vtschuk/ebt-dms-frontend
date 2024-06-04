@@ -122,4 +122,8 @@ export class FileViewComponent implements OnInit {
   getSupport() {
     this.toastr.error("Diese Funktion ist noch nicht implementiert")
   }
+
+  getDocu() {
+
+  }
 }

@@ -18,15 +18,19 @@ import {UserEditDialogComponent} from "../user-edit-dialog/user-edit-dialog.comp
 
 })
 export class UserEditDialogContentComponent {
-  id: number;
+  id: number = 0;
   firstName: string = ''
   lastName: string = ''
   email: string = ''
-  username2: string
-  role: string
-  password2: string
+  username2: string = ''
+  role: string = ''
+  password2: string = ''
 
   constructor(@Inject(MAT_DIALOG_DATA) public user: User, private userService: UserService, public dialogRef: MatDialogRef<UserEditDialogComponent> ) {
+    this.updateValues(user)
+  }
+
+  private updateValues(user: User) {
     this.id = user.id
     this.firstName = user.firstName || ''
     this.lastName = user.lastName || ''
@@ -35,11 +39,11 @@ export class UserEditDialogContentComponent {
     this.role = user.role
     this.password2 = user.password2
   }
-
   saveLogin() {
     console.log("save login")
     const user = {id: this.id, firstName: this.firstName, lastName: this.lastName, email: this.email, username2: this.username2, role: this.role, password2: this.password2}
     this.userService.save(user).subscribe(data => {
+      this.updateValues(data)
       this.dialogRef.close()
     })
   }

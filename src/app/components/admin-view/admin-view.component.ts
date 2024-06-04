@@ -23,6 +23,7 @@ import {UserEditDialogComponent} from "../intern/user-edit-dialog/user-edit-dial
 import {ToastrService} from "ngx-toastr";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 import {UserAddDialogComponent} from "../intern/user-add-dialog/user-add-dialog.component";
+import {UserEditDialogContentComponent} from "../intern/user-edit-dialog-content/user-edit-dialog-content.component";
 
 @Component({
   selector: 'app-admin-view',
@@ -128,9 +129,12 @@ export class AdminViewComponent implements OnInit {
   protected readonly name = name;
 
   editUserDialog(user: User) {
-    console.log(user)
-     const userDialog = new UserEditDialogComponent(this.dialog)
-     userDialog.openDialog(user)
+    this.dialog.open(UserEditDialogContentComponent, {
+      disableClose: true,
+      data: user
+    }).afterClosed().subscribe( () => {
+      this.users = this.adminService.getAllUsers();
+    })
   }
 
   addUserDialog() {

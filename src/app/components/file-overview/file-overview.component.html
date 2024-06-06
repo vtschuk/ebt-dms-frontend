@@ -8,7 +8,7 @@
   <button (click)="getDocu()" color="primary" mat-stroked-button matTooltip="Info über das Programm aufrufen">
     Dokumentation
   </button>
-  <span> Angemeldet als  {{currentUser.firstName}} </span>
+  <!-- span> Angemeldet als  {{currentUser.firstName}} {{currentUser.lastName}}</span -->
 </div>
 
 <div class="example-container mat-elevation-z8">
@@ -24,9 +24,11 @@
       <td *matCellDef="let element" mat-cell> {{element.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="editor">
+    <ng-container eleme matColumnDef="editor">
       <th *matHeaderCellDef mat-header-cell> Bearbeiter</th>
-      <td *matCellDef="let element" mat-cell><a href="mailto:{{element.email}}"> {{element.email}} </a></td>
+      <td *matCellDef="let element" mat-cell>
+        <div *ngIf="getUser(element.userId) | async as user"> {{user?.lastName}} </div>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="thema">

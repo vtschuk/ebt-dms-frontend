@@ -1,6 +1,7 @@
 export class File {
   constructor(
     public id: number,
+    public userId: number,
     public filenumber: string,
     public name: string,
     public date: string,
@@ -14,6 +15,7 @@ export class File {
 
 export interface IFile {
   id: number,
+  userId: number,
   filenumber: string,
   name: string,
   date: string,

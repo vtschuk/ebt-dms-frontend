@@ -14,7 +14,7 @@ import {MatDividerModule} from "@angular/material/divider";
 import {ConfirmDialogComponent, ConfirmDialogModel} from "../intern/confirm-dialog/confirm-dialog.component";
 import {InfoDialogComponent} from "../intern/info-dialog/info-dialog.component";
 import {FileAddDialogComponent} from "../intern/file-add-dialog/file-add-dialog.component";
-import {AsyncPipe, DatePipe} from "@angular/common";
+import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {UserService} from "../../services/user.service";
 import {User} from "../../model/user";
 
@@ -23,7 +23,7 @@ import {User} from "../../model/user";
   templateUrl: './file-overview.component.html',
   styleUrls: ['./file-overview.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe, AsyncPipe],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe, AsyncPipe, NgIf, NgForOf],
 })
 export class FileOverviewComponent implements OnInit, AfterViewInit {
 
@@ -33,6 +33,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{}
   currentUser: User = {id: 0, firstName: '', lastName: '', email: '', role: '', username2: '', password2: ''};
+
 
   constructor(
     private fileService: FileService,
@@ -52,6 +53,10 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     console.log("ngOnInit");
     this.refreshView()
+  }
+
+  getUser(id: number) {
+    return this.userService.get(id)
   }
 
   refreshView() {

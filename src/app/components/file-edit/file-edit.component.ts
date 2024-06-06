@@ -20,13 +20,14 @@ export class FileEditComponent implements OnInit {
 
   currentFile: File = new File(
     0,
-    '',
+    0,
     '',
     new Date().toISOString(),
     '',
     '',
+    '',
     false,
-    false
+    false,
   );
 
   submitted = false;

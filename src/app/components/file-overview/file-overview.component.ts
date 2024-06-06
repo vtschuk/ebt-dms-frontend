@@ -17,13 +17,15 @@ import {FileAddDialogComponent} from "../intern/file-add-dialog/file-add-dialog.
 import {AsyncPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {UserService} from "../../services/user.service";
 import {User} from "../../model/user";
+import {MatBottomSheet, MatBottomSheetModule} from "@angular/material/bottom-sheet";
+import {DocsDialogSheetComponent} from "../intern/docs-dialog-sheet/docs-dialog-sheet.component";
 
 @Component({
   selector: 'app-file-overview',
   templateUrl: './file-overview.component.html',
   styleUrls: ['./file-overview.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe, AsyncPipe, NgIf, NgForOf],
+  imports: [MatTableModule, MatPaginatorModule, MatButtonModule, MatTooltipModule, RouterModule, MatDividerModule, MatIconModule, DatePipe, AsyncPipe, NgIf, NgForOf, MatButtonModule, MatBottomSheetModule],
 })
 export class FileOverviewComponent implements OnInit, AfterViewInit {
 
@@ -41,6 +43,7 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
     private toastr: ToastrService,
     private router: Router,
     public dialog: MatDialog,
+    private _bottomSheet: MatBottomSheet,
     public userService: UserService,
     public loginService: LoginService) {
 
@@ -119,6 +122,6 @@ export class FileOverviewComponent implements OnInit, AfterViewInit {
   }
 
   getDocu() {
-
+    this._bottomSheet.open(DocsDialogSheetComponent);
   }
 }

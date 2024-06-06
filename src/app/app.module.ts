@@ -26,12 +26,12 @@ import {ConfirmDialogComponent} from './components/intern/confirm-dialog/confirm
 import {UserAddDialogComponent} from './components/intern/user-add-dialog/user-add-dialog.component';
 import {SupportDialogComponent} from './components/intern/support-dialog/support-dialog.component';
 import {HelpDialogComponent} from './components/intern/help-dialog/help-dialog.component';
-import {DocsDialogComponent} from './components/intern/docs-dialog/docs-dialog.component';
 import {FileAddDialogComponent} from './components/intern/file-add-dialog/file-add-dialog.component';
 import {
   UserAddDialogContentComponent
 } from './components/intern/user-add-dialog-content/user-add-dialog-content.component';
 import {ResetPasswordDialogComponent} from './components/intern/reset-password-dialog/reset-password-dialog.component';
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import {ResetPasswordDialogComponent} from './components/intern/reset-password-d
     UserAddDialogComponent,
     SupportDialogComponent,
     HelpDialogComponent,
-    DocsDialogComponent,
     FileAddDialogComponent,
     UserAddDialogContentComponent,
     ResetPasswordDialogComponent,
@@ -70,7 +69,8 @@ import {ResetPasswordDialogComponent} from './components/intern/reset-password-d
     MatButtonModule,
     MatTooltipModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

@@ -27,7 +27,8 @@
     <ng-container eleme matColumnDef="editor">
       <th *matHeaderCellDef mat-header-cell> Bearbeiter</th>
       <td *matCellDef="let element" mat-cell>
-        <div *ngIf="getUser(element.userId) | async as user"> {{user?.lastName}} </div>
+        <!-- div *ngIf="getUser(element.userId) | async as user"> {{user?.lastName}} </div-->
+        {{element.userId}}
       </td>
     </ng-container>
 
